@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="yuyue.css" type="text/css" rel="stylesheet">
+  <script type="text/javascript" src="../页面/页面/goback.js"></script>
+  <title>yuyue</title>
+</head>
+<body>
+  <div id="image-container">
+    <img src="../页面/页面/image/背景图-用户填写试驾预约表.png" alt="Full Screen Image">
+    <div id="overlay">
+         <div id="overlay-text">试驾预约</div>
+         <div id="button">
+            <input type="image" src="../页面/页面/image/按钮1@1x.png" onclick="goBack()">
+         </div>
+    </div>
+    <div id="overlay1">
+      <div class="row1">
+        <label for="name">姓名:</label>
+        <input type="text" id="name" name="name" placeholder="请输入姓名">
+    </div>
+    <div class="row">
+        <label for="gender">性别:</label>
+        <input type="text" id="gender" name="gender" placeholder="请输入性别">
+    </div>
+    <div class="row">
+        <label for="car">车型:</label>
+        <input type="text" id="car" name="car" placeholder="请输入车型">
+    </div>
+    <div class="row">
+        <label for="phone">手机号码:</label>
+        <input type="text" id="phone" name="phone" placeholder="请输入手机号码">
+    </div>
+    <div class="row">
+        <label for="time">空闲时间:</label>
+        <input type="date" id="time" name="time">
+    </div>
+    <div class="row">
+        <input type="submit" class="submit-btn" value="提交">
+        <input type="button" class="cancel-btn" value="退出" onclick="goBack()">
+    </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Toggle Password Visibility</title>
+    <style>
+        /* 添加一些简单的样式来美化输入框和图标 */
+        #password-container {
+            position: relative;
+        }
+
+        #toggle-password {
+            cursor: pointer;
+            position: absolute;
+            right: 10px;
+            top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div id="password-container">
+    <input id="password" type="password" placeholder="Enter Password"/>
+    <img id="toggle-password" src="eye-icon.png" alt="Show/Hide password" />
+</div>
+
+<script>
+    // JavaScript 控制显示和隐藏密码
+    document.getElementById('toggle-password').addEventListener('click', function (e) {
+        const passwordInput = document.getElementById('password');
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        // 更改图标的src属性，根据需求添加
+        this.src = type === 'text' ? '系统组件及背景图/系统组件及背景图/1.登录页面/闭眼@1x.png' : '系统组件及背景图/系统组件及背景图/1.登录页面/眼睛.png';
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+    </style>
+</head>
+<body>
+
+<!--创建vue实例，初始化渲染-->
+<!--1，准备容器（Vue管理的范围）-->
+<!--1.引包(开发版本包/生产版本包)官网-->
+<!--3.创建实例-->
+<!--4.添加配置=>完成渲染-->
+
+<div class="box2"></div>
+<div class="box"></div>
+
+<!--插值表达式：Vue的一种模板语法-->
+<!--作用：利用表达式进行插值渲染-->
+<!--语法：{{表达式}}-->
+
+<section id="app">
+<!--这里将来会编写一些用于渲染的代码逻辑-->
+    <h1>{{ nickname }}</h1>
+    <p>{{ friend.name }}</p>
+    <div v-html="msg" ></div>
+<!--    切换css的displaya:none来控制显示隐藏（频繁切换的场景）-->
+    <div v-show="flag" class="box">v-show</div>
+<!--    根据判断条件控制元素的创建和移除（要么显示，要么隐藏）-->
+    <div v-if="flag" class="box">v-if</div>
+
+<!--    v-on 注册事件+提供处理逻辑-->
+<!--    v-on:事件名=“内联语句”-->
+<!--    v-on:可以替换为@-->
+<!--    简写@事件名-->
+<!--    <button v-on:click="count&#45;&#45;">-</button>-->
+<!--    <span>{{ count }}</span>-->
+<!--    <button v-on:click="count++">+</button>-->
+    <button @click="count--">-</button>
+    <span>{{ count }}</span>
+    <button @click="count++">+</button>
+
+    <!--    v-on:事件名=“methods中的函数名”-->
+<!--    <button @click="fn">-</button>-->
+
+    <button @click="fn">切换显示隐藏</button>
+    <h1 v-show="isShow">黑马</h1>
+
+<!--    v-on传参-->
+<!--    <button @click="fn(参数1，参数2)">切换显示隐藏</button>-->
+<!--函数调用-->
+    <div class="box">
+        <h3>小黑自动售货机</h3>
+        <button @click="buy(5)">可乐5元</button>
+        <button @click="buy(10)">咖啡10元</button>
+    </div>
+    <p>银行卡余额：{{ money }}元</p>
+
+
+<!--    v-bind:动态设置html中的标签属性-->
+<!--    v-bind:属性名=“表达式”-->
+<!--    <img v-bind:src="imgUrl" v-bind:title="msg">-->
+<!--    v-bind:src可以直接简写为:src-->
+    <img :src="imgUrl" :title="msg">
+
+<!--图片切换-->
+    <button v-show="index > 0" @click="index--">上一页</button>
+    <div>
+        <img :src="list[index]">
+    </div>
+    <button v-show="index < list.length - 1" @click="index++">下一页</button>
+
+
+<!--    v-for: 基于数据循环，多次渲染整个元素。数组、对象、数字-->
+<!--    v-for = "(item, index) in 数组"-->
+<!--    item每一项，index下标-->
+    <h3>小黑水果店</h3>
+<!--    <ul>-->
+<!--        <li v-for="(item, index) in list1">-->
+<!--         {{ item }} - {{ index }}-->
+<!--        </li>-->
+<!--    </ul>-->
+    <ul>
+        <li v-for="item in list1">
+            {{ item }}
+        </li>
+    </ul>
+
+<!--    小黑书架-->
+    <h3>小黑的书架</h3>
+    <ul>
+        <li v-for="(item, index) in booklist" :key = "item.id">
+            <span>{{ item.name }}</span>
+            <span>{{ item.author }}</span>
+<!--            注册点击事件，通过id来删除数组中的对应项-->
+            <button @click="del(item.id)">删除</button>
+        </li>
+    </ul>
+
+<!--    v-model 给表单元素使用，双向数据绑定，可以快速获取或设置表单元素内容-->
+<!--    数据变化，视图自动更新-->
+<!--    视图变化，数据自动更新-->
+<!--    快速获取或设置表单元素的内容-->
+    账户：<input type="text" v-model.trim = "username"><br><br>
+    密码：<input type="password" v-model.number = "password"><br><br>
+    <button @click="login">登录</button>
+    <button #click="reset">重置</button>
+
+<!--    小黑记事本-->
+
+        <header class="header">
+            <h1>小黑记事本</h1>
+            <input @keyup.enter="add" v-model="todoName" placeholder="请输入任务" class="new-todo">
+            <button @click="add" class="add">添加任务</button>
+        </header>
+        <section class="main">
+            <ul class="todo-list">
+                <li class="todo" v-for="(item, index) in list2" :key="item.id">
+                    <div class="view">
+                        <span class="index">{{ index + 1 }}.</span><label>{{ item.name }}</label>
+                        <button @click="del1(item.id)" class="destroy"></button>
+                    </div>
+                </li>
+            </ul>
+        </section>
+        <!--    统计和清空,如果没有任务则不显示-->
+        <footer class="footer" v-show="list2.length > 0">
+            <span class="todo-count">合计：<strong> {{ list2.length }} </strong></span>
+            <button @click="clear()" class="clear-completed">
+                清空任务
+            </button>
+        </footer>
+</section>
+
+
+<!--引入的是开发版本包-->
+<script src="vue.js" ></script>
+
+<script>
+    // 添加功能
+    // 通过v-model绑定输入框，实时获取表单元素的内容
+    // 点击按钮，进行新增，往数组最前面加
+    // 一旦引入VueJS核心包，在全局环境，就有了Vue构造函数
+    const app = new Vue({
+        // 通过el配置选择器，指定Vue管理的是哪个盒子
+        el:'#app',
+        // 提供数据
+        data:{
+            nickname:'tony',
+            friend:{
+                name:'jepson',
+                desc:'热爱学习1'
+            },
+            msg:`
+                <a href="#">黑马程序员</a>
+            `,
+            // 注意这里的反引号！！！！
+            flag: true,
+            count: 100,
+            isShow: true,
+            money: 100,
+            imgUrl:'',
+            msg:'hello',
+            index:0,
+            list:[
+                '系统界面/画布/搜索结果.png',
+                '系统界面/画布/注册页面.png',
+                '系统界面/画布/用户-个人信息.png',
+            ],
+            list1:['西瓜','苹果','鸭梨'],
+            booklist:[
+                {id: 1, name: '《红楼梦》', author: '曹雪芹'},
+                {id: 2, name: '《西游记》', author: '吴承恩'},
+                {id: 3, name: '《水浒传》', author: '施耐庵'},
+                {id: 4, name: '《三国演义》', author: '罗贯中'}
+            ],
+            usename:'',
+            password:'',
+            list2:[
+                {id: 1, name: '跑步一公里'},
+                {id: 2, name: '跳绳200次'},
+                {id: 3, name: '游泳100米'}
+            ],
+            todoName:''
+        },
+        methods:{
+            // 提供处理逻辑函数
+            fn(){
+                // 让提供的所有methods中的函数，this都指向当前实例
+                // app.isShow = !app.isShow
+                this.isShow = !this.isShow
+            },
+            buy(price){
+                this.money -= price
+            },
+            del(id){
+                // 通过id进行删除数组中对应项：filter(不会改变原数组)
+                // filter:根据条件，保留满足条件的对应项，得到一个新数组
+                this.booklist = this.booklist.filter(item => item.id !== id)
+            },
+            login(){
+
+            },
+            reset(){
+                this.username = ''
+                this.password = ''
+            },
+            del1(id){
+                // 通过id进行删除数组中对应项：filter(不会改变原数组)
+                // filter:根据条件，保留满足条件的对应项，得到一个新数组
+                this.list2 = this.list2.filter(item => item.id !== id)
+            },
+            add(){
+                if(this.todoName.trim() == ''){
+                    alert('请输入任务名称')
+                    return
+                }
+                this.list2.unshift({
+                    id: +new Date(),
+                    name: this.todoName
+                })
+                this.todoName = ''
+            },
+            clear(){
+                this.list2 = []
+            }
+        }
+    })
+</script>
+
+
+</body>
+</html>

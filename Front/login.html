@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            background-image: url("static/asset/img/系统组件及背景图/1.登录页面/背景图.png");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+            background-attachment: fixed;
+        }
+
+        .whole {
+            display: flex;
+            margin: 0 auto;
+            height: 600px;
+            width: 700px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 80px;
+        }
+
+        .title {
+            color: #215476;
+            font-size: 70px;
+            font-family: 宋体;
+        }
+
+        .log {
+            background-color: #FFFFFF;
+            opacity: 0.9;
+            width: 500px;
+            height: 400px;
+            border-radius: 3px;
+            border: 1px solid #BBB;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .image {
+            width: 30px;
+            height: 30px;
+            margin-top: 30px;
+        }
+
+        .in {
+            width: 300px;
+            height: 40px;
+            padding-left: 10px;
+            margin-top: 30px;
+            /*border: 0;*/
+            border: 1px solid grey;
+            border-radius: 5px;
+        }
+
+        input:focus {
+            outline-color: #4095E5;
+        }
+
+        .in1 {
+            background-image: url("static/asset/img/系统组件及背景图/1.登录页面/闭眼@1x.png");
+            background-repeat: no-repeat;
+            background-size: 20px 20px;
+            /*background-position: right;*/
+            background-color: #FFFFFF;
+            width: 20px;
+            height: 20px;
+            border: 0;
+            padding-top: 10px;
+            margin-top: 40px;
+            margin-left: 5px;
+        }
+
+        .in2 {
+            background-image: url("static/asset/img/系统组件及背景图/1.登录页面/眼睛.png");
+            background-repeat: no-repeat;
+            background-size: 20px 20px;
+            /*background-position: right;*/
+            background-color: #FFFFFF;
+            width: 20px;
+            height: 20px;
+            border: 0;
+            padding-top: 10px;
+            margin-top: 40px;
+            margin-left: 5px;
+        }
+
+        .ti {
+            width: 350px;
+            height: 50px;
+            background-color: #3C61C8;
+            color: white;
+            border: 0;
+            font-size: 20px;
+            border-radius: 5px;
+        }
+
+        .login {
+            width: 350px;
+            height: 40px;
+            font-size: 15px;
+            margin-top: -10px;
+        }
+
+        .sign {
+            color: #3C61C8;
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="whole">
+    <h3 class="title"><strong>车e优助</strong></h3>
+
+    <form action="" method="post" class="log">
+        <table style="width: 300px; height: 50px; margin-top: 40px">
+            <tr>
+                <th>
+                    <img src="static/asset/img/系统组件及背景图/1.登录页面/账号.png" class="image">
+                </th>
+                <td class="">
+                    <input type="text" placeholder="请输入账号" class="in" id="phone">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <img src="static/asset/img/系统组件及背景图/1.登录页面/密码.png" class="image">
+                </th>
+                <td>
+                    <input id="code" type="password" placeholder="请输入密码" class="in">
+                </td>
+                <td style="display: flex">
+                    <button type="button" id="eye_con" class="in1"></button>
+                </td>
+            </tr>
+
+        </table>
+        <button class="ti" id="sign">
+            登录
+        </button>
+        <div class="login">没有账户,去<a href="sign.html" class="sign">注册</a></div>
+    </form>
+
+</div>
+
+
+<script>
+
+    let flag = false;
+    const code = document.getElementById('code');
+    const eye_con = document.getElementById('eye_con');
+
+    eye_con.addEventListener('click', function (e) {
+        flag = !flag;
+        console.log(flag);
+        if (flag) {
+            code.type = 'text';
+            eye_con.classList.replace('in1', 'in2');
+        } else {
+            code.type = 'password';
+            eye_con.classList.replace('in2', 'in1');
+        }
+    });
+
+    // var deng = document.getElementById('sign');
+    //
+    // localStorage.setItem('token', "eyJhbGciOiJIUzI1NiJ9.eyJwaG9uZSI6IjEzNzc4MTA2NjIxIiwicm9sZSI6MCwianRpIjoiZDRjYTg4NWEtYmE5My00OGZhLWJkZTgtNGJiMWE1ZTk5YzVkIiwiZXhwIjoxNjU3NjI3OTUzfQ.j7-hNvc17xtpOiYM9jLc0Y416-0KqP68EbsX5HZ9j7c")
+    // deng.onclick = function() {
+    //     var password = document.getElementById('password').value;
+    //     var phone = document.getElementById('phone').value;
+    //
+    //     Fetch('/user/login', JSON.stringify({
+    //         phonenb: phone,
+    //         password: password
+    //     })).then(res => {
+    //         token = res.token
+    //         if (!token) { // 密码错误
+    //             console.log("密码错误")
+    //             alert("密码错误")
+    //         } else {
+    //             // 储存token
+    //             console.log(token)
+    //             localStorage.setItem('token', token)
+    //             // 跳转
+    //             self.location = 'index.html';
+    //             console.log("跳转")
+    //         }
+    //     })
+    //
+    // }
+    //
+    //
+    //
+    // async function Fetch(path, body) {
+    //     return await fetch('http://127.0.0.1:8080' + path, {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json;charset=utf-8'
+    //         },
+    //         body: body,
+    //     }).then(res => {
+    //         return res.json()
+    //     })
+    // }
+
+
+</script>
+</body>
+</html>

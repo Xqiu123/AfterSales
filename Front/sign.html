@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+  <style>
+      *{
+          padding: 0;
+          margin: 0;
+      }
+      body {
+          background-image: url("static/asset/img/系统组件及背景图/1.登录页面/背景图.png");
+          background-repeat: no-repeat;
+          background-size: 100% 100%;
+          background-attachment: fixed;
+      }
+
+      .whole{
+          display: flex;
+          margin: 0 auto;
+          height: 600px;
+          width: 700px;
+          flex-wrap: wrap;
+          justify-content: center;
+          margin-top: 70px;
+      }
+
+      .title{
+          color: #215476;
+          font-size: 70px;
+          font-family: 宋体;
+      }
+
+      .log{
+          background-color: #FFFFFF;
+          opacity: 0.9;
+          width: 500px;
+          height: 450px;
+          border-radius: 3px;
+          border: 1px solid #BBB;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+      }
+
+      .image{
+          width: 40px;
+          margin-top: 20px;
+      }
+
+      .image1{
+          width: 28px;
+      }
+
+      .in{
+          width: 300px;
+          height: 35px;
+          padding-left: 10px;
+          margin-top: 20px;
+          /*border: 0;*/
+          border: 1px solid grey;
+          border-radius: 5px;
+      }
+
+      input:focus{
+          outline-color:#4095E5 ;
+      }
+
+      .ti{
+          width: 350px;
+          height: 50px;
+          background-color: #3C61C8;
+          color: white;
+          border: 0;
+          font-size: 20px;
+          border-radius: 5px;
+      }
+
+      .login{
+          width: 350px;
+          height: 40px;
+          font-size: 15px;
+          margin-top: -10px;
+      }
+
+      .sign{
+          color: #3C61C8;
+          text-decoration: none;
+      }
+
+  </style>
+</head>
+<body>
+
+<div class="whole">
+    <h3 class="title"><strong>车e优助</strong></h3>
+
+    <form action="" method="post" class="log">
+        <table style="width: 300px; height: 50px; margin-top: 40px">
+            <tr>
+                <th>
+                    <img src="static/asset/img/系统组件及背景图/2.注册页面/手机号.png" class="image image1">
+                </th>
+                <td class="">
+                    <input type="text" placeholder="请输入账号" class="in">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <img src="static/asset/img/系统组件及背景图/2.注册页面/姓名.png" class="image">
+                </th>
+                <td class="">
+                    <input type="text" placeholder="请输入昵称" class="in">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <img src="static/asset/img/系统组件及背景图/2.注册页面/密码.png" class="image">
+                </th>
+                <td class="">
+                    <input type="password" placeholder="请输入密码" class="in">
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <img src="static/asset/img/系统组件及背景图/2.注册页面/密码.png" class="image">
+                </th>
+                <td class="">
+                    <input type="radio" name="gender" value="male"> 男
+                    <input type="radio" name="gender" value="male"> 女
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    <img src="static/asset/img/系统组件及背景图/2.注册页面/密码.png" class="image">
+                </th>
+                <td class="">
+                    <input type="password" placeholder="请确认密码" class="in">
+                </td>
+            </tr>
+
+        </table>
+        <button class="ti">
+            注册
+        </button>
+        <div class="login">我有账户,去<a href="login.html" class="sign">登录</a></div>
+    </form>
+
+</div>
+
+
+
+</body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+        .head{
+            background-color: #333;
+            display: flex;
+            height: 80px;
+            align-items: center;
+        }
+
+        .icon{
+            margin-left: 30px;
+        }
+
+        .icon img{
+            width: 40px;
+        }
+
+        .txt{
+            color: white;
+            font-weight: 700;
+            font-size: 40px;
+            margin: 0 auto;
+            height: 60px;
+            width: 200px;
+        }
+
+        .txt1{
+            color: white;
+            width: 200px;
+        }
+
+        .sidebar {
+            width: 250px;
+            color: #fff;
+            position: fixed;
+            overflow-y: auto;
+        }
+
+        .sidebar a {
+            padding: 10px 20px;
+            text-decoration: none;
+            color: black;
+            display: flex;
+            align-items: center;
+            transition: background-color 0.3s;
+            height: 80px;
+            font-size: 20px;
+        }
+
+        .sidebar a:hover {
+            background-color: white;
+            border: 1px solid #cdcdcd;
+        }
+
+        .sidebar a img{
+            height: 30px;
+            margin-right: 10px;
+            margin-left: 20px;
+        }
+
+        .content{
+            margin-left: 250px;
+        }
+
+        .me{
+            margin-left: 150px;
+            width: 400px;
+            display: flex;
+            flex-wrap: wrap;
+            border: 1px solid #BBBBBB;
+        }
+
+        .lis img{
+            width: 25px;
+            margin-right: 10px;
+        }
+
+        .lis{
+            align-items: center;
+            display: flex;
+            width: 400px;
+            height: 80px;
+            font-size: 25px;
+            background-color: rgba(255,255,255,0.6);
+            padding-left: 20px;
+        }
+
+        .alter{
+            display: flex;
+            align-items: center;
+            background-color: rgba(255,255,255,0.6);
+            width: 400px;
+            height: 400px;
+            font-size: 25px;
+            margin-left: 50px;
+            border: 1px solid #BBBBBB;
+            margin-top: 100px;
+        }
+
+        .alter form table tr{
+            height: 80px;
+        }
+
+        .td{
+            margin-left: 20px;
+        }
+
+    </style>
+</head>
+<body>
+<div>
+    <img src="static/asset/img/系统组件及背景图/9.用户个人中心/背景图-用户个人中心.png" class="back" height="100%" width="100%" style="z-index: -1; position: fixed; opacity: 60%" />
+</div>
+<div class="head">
+    <div class="icon"><img src="static/asset/img/系统组件及背景图/9.用户个人中心/左箭头.png"></div>
+    <div class="txt">个人中心</div>
+    <div class="txt1">你好，可可西里</div>
+</div>
+
+<div class="main" id="main">
+    <div class="sidebar">
+        <a href="#" @click="showContent('page1','li1')" style="background-color: white" id="li1">
+            <img src="static/asset/img/系统组件及背景图/9.用户个人中心/个人信息.png">
+            个人信息
+        </a>
+        <a href="#" @click="showContent('page2','li2')" id="li2">
+            <img src="static/asset/img/系统组件及背景图/9.用户个人中心/我的订单.png">
+            我的订单
+        </a>
+        <a href="#" @click="showContent('page3','li3')" id="li3">
+            <img src="static/asset/img/系统组件及背景图/9.用户个人中心/维修申请.png">
+            维修申请
+        </a>
+        <a href="#" @click="showContent('page4','li4')" id="li4">
+            <img src="static/asset/img/系统组件及背景图/9.用户个人中心/试驾预约.png">
+            试驾预约
+        </a>
+        <a href="#" @click="showContent('page5','li5')" id="li5">
+            <img src="static/asset/img/系统组件及背景图/9.用户个人中心/我的收藏.png">
+            我的收藏
+        </a>
+    </div>
+
+    <div class="content">
+<!--        个人信息-->
+        <div id="page1" style="display: flex; align-items: center;">
+            <div class="me">
+                <div class="lis">
+                    <img src="static/asset/img/系统组件及背景图/10.用户中心-个人信息/昵称.png">
+                    昵称：&nbsp;可可西里
+                </div>
+                <div class="lis">
+                    <img src="static/asset/img/系统组件及背景图/10.用户中心-个人信息/性别.png">
+                    性别：&nbsp;女
+                </div>
+                <div class="lis">
+                    <img src="static/asset/img/系统组件及背景图/10.用户中心-个人信息/手机号.png">
+                    绑定手机号：&nbsp;17377777777
+                </div>
+
+            </div>
+            <div class="alter">
+                <form>
+                    <table>
+                        <tr>
+                            <td class="td">昵称</td>
+                            <td><input disabled ="true" type="text" class="body" id="name" placeholder="请输入昵称"></td>
+                        </tr>
+                        <tr>
+                            <td class="td">性别</td>
+                            <td>
+                                <input type="radio" name="gender" value="male"> 男性
+                                <input type="radio" name="gender" value="male"> 女性
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="td">密码</td>
+                            <td><input type="text" class="body" id="password"></td>
+                        </tr>
+                        <tr>
+                            <td class="td">确认密码</td>
+                            <td><input type="text" class="body" id="ver_password"></td>
+                        </tr>
+
+                    </table>
+                    <button type="submit" class="btn">修改信息</button>
+                </form>
+            </div>
+        </div>
+<!--        我的订单-->
+        <div id="page2" style="display: none;">
+            <h1>页面2的内容</h1>
+
+        </div>
+<!--        维修申请-->
+        <div id="page3" style="display: none;">
+            <h1>页面3的内容</h1>
+            <p>这是页面3的内容...</p>
+        </div>
+<!--        试驾预约-->
+        <div id="page4" style="display: none;">
+            <h1>页面4的内容</h1>
+
+            <table id="carsTable">
+                <thead>
+                <tr>
+                    <th>车型</th>
+                    <th>选择时间</th>
+                    <th>预约状态</th>
+                </tr>
+                </thead>
+                <tbody>
+                <!-- 数据将通过JavaScript动态填充 -->
+                </tbody>
+            </table>
+
+            <div id="pagination">
+                <button id="prevPage">上一页</button>
+                <span id="currentPage">1</span>
+                <button id="nextPage">下一页</button>
+            </div>
+        </div>
+<!--        我的收藏-->
+        <div id="page5" style="display: none;">
+            <h1>页面5的内容</h1>
+            <p>这是页面5的内容...</p>
+        </div>
+
+    </div>
+</div>
+
+<script src="vue.js" ></script>
+<script>
+    // // 当文档加载完毕时执行
+    // $(document).ready(function() {
+    //     var currentPage = 1; // 当前页码
+    //     var pageSize = 10; // 每页显示的数据量
+    //
+    //     function fetchCars(page) {
+    //         $.getJSON(`/api/cars?page=${page}&pageSize=${pageSize}`, function(data) {
+    //             var tableBody = $('#carsTable tbody');
+    //             tableBody.empty(); // 清空表格当前内容
+    //             $.each(data, function(i, car) {
+    //                 tableBody.append(`<tr><td>${car.model}</td><td>${car.bookingTime}</td><td>${car.status}</td></tr>`);
+    //             });
+    //         });
+    //     }
+    //
+    //     // 初始加载
+    //     fetchCars(currentPage);
+    //
+    //     // 分页控制
+    //     $('#prevPage').click(function() {
+    //         if (currentPage > 1) {
+    //             currentPage--;
+    //             fetchCars(currentPage);
+    //             $('#currentPage').text(currentPage);
+    //         }
+    //     });
+    //
+    //     $('#nextPage').click(function() {
+    //         currentPage++;
+    //         fetchCars(currentPage);
+    //         $('#currentPage').text(currentPage);
+    //     });
+    // });
+    //
+
+    const app = new Vue({
+        el:'#main',
+        data:{
+
+        },
+        methods:{
+            showContent(pageId,liId) {
+                var sidebar = document.querySelectorAll('.sidebar > a');
+                var pages = document.querySelectorAll('.content > div');
+                pages.forEach(function(page) {
+                    if (page.id === pageId) {
+                        page.style.display = 'flex';
+                    } else {
+                        page.style.display = 'none';
+                    }
+                });
+                sidebar.forEach(function (li){
+                    if (li.id === liId){
+                        li.style.backgroundColor = 'white';
+                    }else {
+                        li.style.backgroundColor = 'rgb(255,255,255,0.00000001)';
+                    }
+                })
+            }
+
+        }
+    })
+</script>
+</body>
+</html>
