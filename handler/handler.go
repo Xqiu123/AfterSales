@@ -27,9 +27,13 @@ func GetLine() string {
 }
 
 func SendResponse(c *gin.Context, err error, data interface{}) {
+	message := ""
+	if err != nil {
+		message = err.Error()
+	}
 	c.JSON(http.StatusOK, Response{
 		Code:    200,
-		Message: err.Error(),
+		Message: message,
 		Data:    data,
 	})
 }

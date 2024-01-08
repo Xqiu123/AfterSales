@@ -6,8 +6,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// ListCars 处理列出汽车信息的请求
-func ListCars(c *gin.Context) {
+// List 处理列出汽车信息的请求
+func List(c *gin.Context) {
 	brand := c.Param("brand")
 
 	cars, err := service.GetAllCarsByBrand(brand)

@@ -10,6 +10,10 @@ type ApplicationModel struct {
 	IsEnd       int    `json:"is_end" gorm:"not null"`
 }
 
+func (*ApplicationModel) TableName() string {
+	return "applications"
+}
+
 // CreateApplication 添加新的Application
 func CreateApplication(application *ApplicationModel) error {
 	return DB.Create(application).Error

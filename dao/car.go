@@ -16,6 +16,10 @@ type CarModel struct {
 	Fuel      string `json:"fuel" gorm:"default:null"`
 }
 
+func (*CarModel) TableName() string {
+	return "cars"
+}
+
 // CreateCar 添加新的Car
 func CreateCar(car *CarModel) error {
 	return DB.Create(car).Error

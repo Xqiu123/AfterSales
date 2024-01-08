@@ -50,8 +50,12 @@ func Load(g *gin.Engine, mw ...gin.HandlerFunc) *gin.Engine {
 	}
 
 	carRouter := g.Group("api/v1/car")
-	carRouter.GET("/info/:id", car.GetCar)
-	carRouter.DELETE("/info/:id", adminRequired, car.DeleteCar)
+	carRouter.POST("", adminRequired, car.Create)
+	carRouter.PUT("", adminRequired, car.Update)
+	carRouter.DELETE("/info/:id", adminRequired, car.Delete)
+
+	carRouter.GET("/info/:id", car.Get)
+	carRouter.GET("/list", car.List)
 
 	// The health check handlers
 	svcd := g.Group("/sd")

@@ -11,8 +11,8 @@ import (
 	"strconv"
 )
 
-// GetCar 处理获取特定汽车信息的请求
-func GetCar(c *gin.Context) {
+// Get 处理获取特定汽车信息的请求
+func Get(c *gin.Context) {
 	log.Info("GetCar function called.", zap.String("X-Request-Id", util.GetReqID(c)))
 
 	id, err := strconv.Atoi(c.Param("id"))

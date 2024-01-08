@@ -8,8 +8,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// UpdateCar 处理更新汽车信息的请求
-func UpdateCar(c *gin.Context) {
+// Update 处理更新汽车信息的请求
+func Update(c *gin.Context) {
 	var req dao.CarModel
 	if err := c.BindJSON(&req); err != nil {
 		SendError(c, errno.BadRequest, nil, err.Error(), GetLine())

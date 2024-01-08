@@ -75,8 +75,8 @@ func Login(telephone string, password string) (string, error) {
 
 	// 生成 auth token
 	Token, err := token.GenerateToken(&token.TokenPayload{
-		Id:      uint32(user.Id),
-		Role:    uint32(role),
+		Id:      user.Id,
+		Role:    role,
 		Expired: time.Hour * 24 * time.Duration(10),
 	})
 	if err != nil {
@@ -85,13 +85,14 @@ func Login(telephone string, password string) (string, error) {
 
 	return Token, nil
 }
+
 func Register(telephone, name, password, sex string) error {
 	return dao.RegisterUser(
 		&dao.RegisterInfo{
 			Telephone: telephone,
 			Name:      name,
 			Password:  password,
-			Role:      "user",
+			Role:      constvar.NormalRole,
 			Sex:       sex,
 		})
 }

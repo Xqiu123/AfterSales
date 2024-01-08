@@ -9,8 +9,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// CreateCar 处理增加汽车信息的请求
-func CreateCar(c *gin.Context) {
+// Create 处理增加汽车信息的请求
+func Create(c *gin.Context) {
 	var req dao.CarModel
 	if err := c.BindJSON(&req); err != nil {
 		SendError(c, errno.BadRequest, nil, err.Error(), GetLine())
