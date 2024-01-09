@@ -142,10 +142,25 @@ definitions:
       role:
         type: string
     type: object
-host: as.muxixyz.com
+  user.RegisterRequest:
+    properties:
+      name:
+        type: string
+      password:
+        type: string
+      sex:
+        type: string
+      telephone:
+        type: string
+    required:
+    - name
+    - password
+    - telephone
+    type: object
+host: localhost
 info:
   contact: {}
-  description: The gateway of as
+  description: The gateway of AfterSales
   title: as
   version: "1.0"
 paths:
@@ -233,6 +248,23 @@ paths:
       summary: 登录 api
       tags:
       - auth
+  /auth/register:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: register_request
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/user.RegisterRequest'
+      produces:
+      - application/json
+      responses: {}
+      summary: 注册 api
+      tags:
+      - auth
   /car:
     post:
       consumes:
@@ -308,7 +340,12 @@ paths:
         type: integer
       produces:
       - application/json
-      responses: {}
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
       summary: list车辆 api
       tags:
       - car
@@ -459,8 +496,3 @@ paths:
       tags:
       - user
 swagger: "2.0"
-tags:
-- description: 用户服务
-  name: user
-- description: 认证服务
-  name: auth

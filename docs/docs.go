@@ -145,6 +145,32 @@ const docTemplate = `{
                 }
             }
         },
+        "/auth/register": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "注册 api",
+                "parameters": [
+                    {
+                        "description": "register_request",
+                        "name": "object",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user.RegisterRequest"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
         "/car": {
             "post": {
                 "consumes": [
@@ -229,7 +255,15 @@ const docTemplate = `{
                         "in": "query"
                     }
                 ],
-                "responses": {}
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
             }
         },
         "/car/{id}": {
@@ -700,28 +734,40 @@ const docTemplate = `{
                     "type": "string"
                 }
             }
-        }
-    },
-    "tags": [
-        {
-            "description": "用户服务",
-            "name": "user"
         },
-        {
-            "description": "认证服务",
-            "name": "auth"
+        "user.RegisterRequest": {
+            "type": "object",
+            "required": [
+                "name",
+                "password",
+                "telephone"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "sex": {
+                    "type": "string"
+                },
+                "telephone": {
+                    "type": "string"
+                }
+            }
         }
-    ]
+    }
 }`
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "as.muxixyz.com",
+	Host:             "localhost",
 	BasePath:         "/api/v1",
 	Schemes:          []string{},
 	Title:            "as",
-	Description:      "The gateway of as",
+	Description:      "The gateway of AfterSales",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

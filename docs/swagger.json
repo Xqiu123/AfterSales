@@ -1,12 +1,12 @@
 {
     "swagger": "2.0",
     "info": {
-        "description": "The gateway of as",
+        "description": "The gateway of AfterSales",
         "title": "as",
         "contact": {},
         "version": "1.0"
     },
-    "host": "as.muxixyz.com",
+    "host": "localhost",
     "basePath": "/api/v1",
     "paths": {
         "/application": {
@@ -138,6 +138,32 @@
                 }
             }
         },
+        "/auth/register": {
+            "post": {
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "auth"
+                ],
+                "summary": "注册 api",
+                "parameters": [
+                    {
+                        "description": "register_request",
+                        "name": "object",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user.RegisterRequest"
+                        }
+                    }
+                ],
+                "responses": {}
+            }
+        },
         "/car": {
             "post": {
                 "consumes": [
@@ -222,7 +248,15 @@
                         "in": "query"
                     }
                 ],
-                "responses": {}
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
             }
         },
         "/car/{id}": {
@@ -693,16 +727,28 @@
                     "type": "string"
                 }
             }
-        }
-    },
-    "tags": [
-        {
-            "description": "用户服务",
-            "name": "user"
         },
-        {
-            "description": "认证服务",
-            "name": "auth"
+        "user.RegisterRequest": {
+            "type": "object",
+            "required": [
+                "name",
+                "password",
+                "telephone"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                },
+                "sex": {
+                    "type": "string"
+                },
+                "telephone": {
+                    "type": "string"
+                }
+            }
         }
-    ]
+    }
 }
