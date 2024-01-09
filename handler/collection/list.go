@@ -15,7 +15,7 @@ import (
 // @Accept application/json
 // @Produce application/json
 // @Param Authorization header string true "token 用户令牌"
-// @Success 200 {object} post.PostPartInfoResponse
+// @Success 200 {object} []dao.CarModel
 // @Router /collection/list [get]
 func List(c *gin.Context) {
 	log.Info("Collection List function called.", zap.String("X-Request-Id", util.GetReqID(c)))

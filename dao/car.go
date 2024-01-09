@@ -46,7 +46,7 @@ func GetCarByID(id int) (*CarModel, error) {
 }
 
 // GetAllCarsByBrand 获取特定品牌或所有品牌的Car
-func GetAllCarsByBrand(brand string) ([]*CarModel, error) {
+func GetAllCarsByBrand(brand string) (map[string][]*CarModel, error) {
 	var cars []*CarModel
 	query := DB.Model(&CarModel{})
 	if brand != "" {
@@ -56,7 +56,12 @@ func GetAllCarsByBrand(brand string) ([]*CarModel, error) {
 	if result.Error != nil {
 		return nil, result.Error
 	}
-	return cars, nil
+	brandMap := make(map[string][]*CarModel)
+	for _, car := range cars {
+		brandMap[car.Brand] = append(brandMap[car.Brand], car)
+	}
+
+	return brandMap, nil
 }
 
 // SearchCarsByName 根据名称搜索Car

@@ -8,6 +8,14 @@ import (
 	"strconv"
 )
 
+// Delete
+// @Summary 删除车辆 api
+// @Tags car
+// @Accept application/json
+// @Produce application/json
+// @Param Authorization header string true "token 用户令牌"
+// @Param id path int true "car_id"
+// @Router /car/{id} [delete]
 func Delete(c *gin.Context) {
 	id, err := strconv.Atoi(c.Param("id"))
 	if err != nil {

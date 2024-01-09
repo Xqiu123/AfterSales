@@ -16,8 +16,8 @@ import (
 // @Tags auth
 // @Accept application/json
 // @Produce application/json
-// @Param object body StudentLoginRequest true "login_request"
-// @Success 200 {object} StudentLoginResponse
+// @Param object body LoginRequest true "login_request"
+// @Success 200 {object} LoginResponse
 // @Router /auth/login [post]
 func Login(c *gin.Context) {
 	log.Info("User Login function called.", zap.String("X-Request-Id", util.GetReqID(c)))
@@ -34,5 +34,7 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	SendResponse(c, nil, token)
+	SendResponse(c, nil, LoginResponse{
+		Token: token,
+	})
 }

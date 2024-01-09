@@ -12,14 +12,9 @@ import (
 
 // @Title as
 // @Version 1.0
-// @Description The gateway of as
-// @Host as.muxixyz.com
+// @Description The gateway of AfterSales
+// @Host localhost
 // @BasePath /api/v1
-
-// @tag.name user
-// @tag.description 用户服务
-// @tag.name auth
-// @tag.description 认证服务
 
 func main() {
 	err := config.Init("./conf/config.yaml", "")

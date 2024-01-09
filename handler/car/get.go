@@ -11,7 +11,14 @@ import (
 	"strconv"
 )
 
-// Get 处理获取特定汽车信息的请求
+// Get
+// @Summary 获取车辆 api
+// @Tags car
+// @Accept application/json
+// @Produce application/json
+// @Param Authorization header string true "token 用户令牌"
+// @Param id path int true "car_id"
+// @Router /car/info/{id} [get]
 func Get(c *gin.Context) {
 	log.Info("GetCar function called.", zap.String("X-Request-Id", util.GetReqID(c)))
 

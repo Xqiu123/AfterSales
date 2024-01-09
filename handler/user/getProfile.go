@@ -22,7 +22,7 @@ import (
 // @Produce application/json
 // @Param Authorization header string true "token 用户令牌"
 // @Param id path int true "user_id"
-// @Success 200 {object} UserProfile
+// @Success 200 {object} dao.UserModel
 // @Router /user/profile/{id} [get]
 func GetProfile(c *gin.Context) {
 	log.Info("User GetProfile function called.", zap.String("X-Request-Id", util.GetReqID(c)))

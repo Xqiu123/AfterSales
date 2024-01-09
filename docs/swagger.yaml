@@ -1,0 +1,466 @@
+basePath: /api/v1
+definitions:
+  ListResponse:
+    properties:
+      count:
+        type: integer
+      list:
+        items:
+          $ref: '#/definitions/user'
+        type: array
+    type: object
+  LoginRequest:
+    properties:
+      password:
+        type: string
+      telephone:
+        type: string
+    required:
+    - password
+    - telephone
+    type: object
+  LoginResponse:
+    properties:
+      token:
+        type: string
+    type: object
+  UpdateInfoRequest:
+    properties:
+      avatar_url:
+        type: string
+      name:
+        type: string
+      signature:
+        type: string
+    type: object
+  application.ListAllApplicationResponse:
+    properties:
+      drive:
+        items:
+          $ref: '#/definitions/dao.ApplicationInfo'
+        type: array
+      repair:
+        items:
+          $ref: '#/definitions/dao.ApplicationInfo'
+        type: array
+    type: object
+  application.ListMyApplicationResponse:
+    properties:
+      drive:
+        items:
+          $ref: '#/definitions/dao.ApplicationModel'
+        type: array
+      repair:
+        items:
+          $ref: '#/definitions/dao.ApplicationModel'
+        type: array
+    type: object
+  dao.ApplicationInfo:
+    properties:
+      class:
+        type: string
+      description:
+        type: string
+      is_end:
+        type: integer
+      telephone:
+        type: string
+      time:
+        type: string
+      user_name:
+        type: string
+    type: object
+  dao.ApplicationModel:
+    properties:
+      car_id:
+        type: integer
+      class:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      is_end:
+        type: integer
+      time:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  dao.CarModel:
+    properties:
+      brand:
+        type: string
+      color:
+        type: string
+      drive_mode:
+        type: string
+      fuel:
+        type: string
+      gearbox:
+        type: string
+      id:
+        type: integer
+      image:
+        type: string
+      max_horse:
+        type: string
+      max_power:
+        type: string
+      motor:
+        type: string
+      name:
+        type: string
+      price:
+        type: string
+      size:
+        type: string
+    type: object
+  dao.UserModel:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      role:
+        type: string
+      sex:
+        type: string
+      telephone:
+        type: string
+    type: object
+  user:
+    properties:
+      avatar:
+        type: string
+      email:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+      role:
+        type: string
+    type: object
+host: as.muxixyz.com
+info:
+  contact: {}
+  description: The gateway of as
+  title: as
+  version: "1.0"
+paths:
+  /application:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: token 用户令牌
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: application
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/dao.ApplicationModel'
+      produces:
+      - application/json
+      responses: {}
+      summary: 申请试驾或维修 api
+      tags:
+      - application
+  /application/list:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: token 用户令牌
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/application.ListMyApplicationResponse'
+      summary: list我的试驾和维修application api
+      tags:
+      - application
+  /application/list/all:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: token 用户令牌
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/application.ListAllApplicationResponse'
+      summary: list所有试驾和维修application api
+      tags:
+      - application
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: login the student-as
+      parameters:
+      - description: login_request
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/LoginRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/LoginResponse'
+      summary: 登录 api
+      tags:
+      - auth
+  /car:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: token 用户令牌
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: car
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/dao.CarModel'
+      produces:
+      - application/json
+      responses: {}
+      summary: 新增车辆 api
+      tags:
+      - car
+  /car/{id}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: token 用户令牌
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: car_id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: 删除车辆 api
+      tags:
+      - car
+  /car/info/{id}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: token 用户令牌
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: car_id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: 获取车辆 api
+      tags:
+      - car
+  /car/list:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: brand
+        in: query
+        name: brand
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: list车辆 api
+      tags:
+      - car
+  /collection/{car_id}:
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: token 用户令牌
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: car_id
+        in: path
+        name: car_id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      summary: 收藏/取消收藏帖子 api
+      tags:
+      - collection
+  /collection/list:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: token 用户令牌
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/dao.CarModel'
+            type: array
+      summary: list收藏 api
+      tags:
+      - collection
+  /user:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: token 用户令牌
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: update_info_request
+        in: body
+        name: object
+        required: true
+        schema:
+          $ref: '#/definitions/UpdateInfoRequest'
+      produces:
+      - application/json
+      responses: {}
+      summary: 修改用户个人信息 api
+      tags:
+      - user
+  /user/list:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: token 用户令牌
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: limit
+        in: query
+        name: limit
+        type: integer
+      - description: page
+        in: query
+        name: page
+        type: integer
+      - description: last_id
+        in: query
+        name: last_id
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/ListResponse'
+      summary: list user api
+      tags:
+      - user
+  /user/myprofile:
+    get:
+      consumes:
+      - application/json
+      description: '获取 my 完整 user 信息（权限 role: Normal-普通学生用户; NormalAdmin-学生管理员; Muxi-团队成员;
+        MuxiAdmin-团队管理员; SuperAdmin-超级管理员）'
+      parameters:
+      - description: token 用户令牌
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dao.UserModel'
+      summary: get 我的 profile api
+      tags:
+      - user
+  /user/profile/{id}:
+    get:
+      consumes:
+      - application/json
+      description: '通过 userId 获取完整 user 信息（权限 role: Normal-普通学生用户; NormalAdmin-学生管理员;
+        Muxi-团队成员; MuxiAdmin-团队管理员; SuperAdmin-超级管理员）'
+      parameters:
+      - description: token 用户令牌
+        in: header
+        name: Authorization
+        required: true
+        type: string
+      - description: user_id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dao.UserModel'
+      summary: 获取用户 profile api
+      tags:
+      - user
+swagger: "2.0"
+tags:
+- description: 用户服务
+  name: user
+- description: 认证服务
+  name: auth

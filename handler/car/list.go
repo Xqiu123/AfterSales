@@ -6,9 +6,15 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// List 处理列出汽车信息的请求
+// List
+// @Summary list车辆 api
+// @Tags car
+// @Accept application/json
+// @Produce application/json
+// @Param brand query int false "brand"
+// @Router /car/list [get]
 func List(c *gin.Context) {
-	brand := c.Param("brand")
+	brand := c.DefaultQuery("brand", "")
 
 	cars, err := service.GetAllCarsByBrand(brand)
 	if err != nil {

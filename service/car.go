@@ -23,7 +23,7 @@ func GetCarByID(id int) (*dao.CarModel, error) {
 }
 
 // GetAllCarsByBrand 获取特定品牌或所有品牌的Car
-func GetAllCarsByBrand(brand string) ([]*dao.CarModel, error) {
+func GetAllCarsByBrand(brand string) (map[string][]*dao.CarModel, error) {
 	return dao.GetAllCarsByBrand(brand)
 }
 

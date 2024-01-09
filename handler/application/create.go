@@ -9,7 +9,14 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// Create 处理增加汽车信息的请求
+// Create
+// @Summary 申请试驾或维修 api
+// @Tags application
+// @Accept application/json
+// @Produce application/json
+// @Param Authorization header string true "token 用户令牌"
+// @Param object body dao.ApplicationModel true "application"
+// @Router /application [post]
 func Create(c *gin.Context) {
 	var req dao.ApplicationModel
 	if err := c.BindJSON(&req); err != nil {

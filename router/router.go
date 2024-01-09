@@ -55,7 +55,7 @@ func Load(g *gin.Engine, mw ...gin.HandlerFunc) *gin.Engine {
 	{
 		carRouter.POST("", adminRequired, car.Create)
 		carRouter.PUT("", adminRequired, car.Update)
-		carRouter.DELETE("/info/:id", adminRequired, car.Delete)
+		carRouter.DELETE("/:id", adminRequired, car.Delete)
 
 		carRouter.GET("/info/:id", car.Get)
 		carRouter.GET("/list", car.List)

@@ -18,7 +18,6 @@ import (
 // @Produce application/json
 // @Param Authorization header string true "token 用户令牌"
 // @Param car_id path int true "car_id"
-// @Success 200 {object} handler.Response
 // @Router /collection/{car_id} [post]
 func CreateOrRemove(c *gin.Context) {
 	log.Info("Collection CreateOrRemove function called.", zap.String("X-Request-Id", util.GetReqID(c)))
