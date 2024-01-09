@@ -344,7 +344,10 @@ paths:
         "200":
           description: OK
           schema:
-            additionalProperties: true
+            additionalProperties:
+              items:
+                $ref: '#/definitions/dao.CarModel'
+              type: array
             type: object
       summary: list车辆 api
       tags:

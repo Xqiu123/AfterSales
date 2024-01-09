@@ -12,7 +12,7 @@ import (
 // @Accept application/json
 // @Produce application/json
 // @Param brand query int false "brand"
-// @Success 200 {object} map[string]interface{}
+// @Success 200 {object} map[string][]dao.CarModel
 // @Router /car/list [get]
 func List(c *gin.Context) {
 	brand := c.DefaultQuery("brand", "")
