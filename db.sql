@@ -4,9 +4,10 @@ CREATE TABLE users
 (
     id int AUTO_INCREMENT PRIMARY KEY,
     telephone varchar(50) NOT NULL,
-    password varchar(50) NOT NULL,
+    password varchar(200) NOT NULL,
     name varchar(20) NOT NULL,
     sex varchar(20) DEFAULT NULL,
+    role varchar(20) NOT NULL,
     UNIQUE KEY (`telephone`)
 );
 

@@ -13,7 +13,7 @@ type UserModel struct {
 	Password  string `json:"-" gorm:"not null"`
 	Name      string `json:"name" gorm:"not null"`
 	Sex       string `json:"sex" gorm:"default:null"`
-	Role      string `gorm:"column:role;"`
+	Role      string `json:"role" gorm:"column:role;"`
 }
 
 func (*UserModel) TableName() string {
