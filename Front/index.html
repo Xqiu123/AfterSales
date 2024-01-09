@@ -465,8 +465,10 @@
 
 
 <!--引入的是开发版本包-->
-<script src="vue.js"></script>
+<script type="module" src="vue.js"></script>
 <script>
+
+    import {Fetch} from "./fetch";
 
     let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');
@@ -577,8 +579,8 @@
                     .then(res => {
                         detail = res.list;
                         console.log(detail.name);
-                        list = res.list
-                        msg = res.msg
+                        let list = res.list
+                        let msg = res.msg
 
                         var main = document.querySelector(".frame");
                         for (let i = 0; i < list.length; i++) {
