@@ -1,6 +1,7 @@
 package main
 
 import (
+	"as/config"
 	"as/dao"
 	"as/log"
 	"as/router"
@@ -21,6 +22,11 @@ import (
 // @tag.description 认证服务
 
 func main() {
+	err := config.Init("./conf/config.yaml", "")
+	if err != nil {
+		panic(err)
+	}
+
 	// logger sync
 	defer log.SyncLogger()
 

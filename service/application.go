@@ -23,11 +23,25 @@ func GetApplicationByID(id int) (*dao.ApplicationModel, error) {
 }
 
 // GetAllApplications 获取所有Application
-func GetAllApplications() ([]*dao.ApplicationModel, error) {
-	return dao.GetAllApplications()
+func GetAllApplications() ([]*dao.ApplicationInfo, []*dao.ApplicationInfo, error) {
+	applications, err := dao.GetAllApplications()
+	if err != nil {
+		return nil, nil, err
+	}
+
+	driveApplications := make([]*dao.ApplicationInfo, 0)
+	repairApplications := make([]*dao.ApplicationInfo, 0)
+	for _, application := range applications {
+		if application.Class == "drive" {
+			driveApplications = append(driveApplications, application)
+		} else {
+			repairApplications = append(repairApplications, application)
+		}
+	}
+
+	return driveApplications, repairApplications, nil
 }
 
-// GetAllApplications 获取我的Application
-func GetMyApplications(userId int) ([]*dao.ApplicationModel, error) {
+func GetApplicationsByUserId(userId int) ([]*dao.ApplicationModel, error) {
 	return dao.GetMyApplications(userId)
 }

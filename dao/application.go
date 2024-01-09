@@ -39,17 +39,29 @@ func GetApplicationByID(id int) (*ApplicationModel, error) {
 	return application, nil
 }
 
-// GetAllApplications 获取所有Application
-func GetAllApplications() ([]*ApplicationModel, error) {
-	var applications []*ApplicationModel
-	result := DB.Find(&applications)
-	if result.Error != nil {
-		return nil, result.Error
+func GetAllApplications() ([]*ApplicationInfo, error) {
+	var applications []*ApplicationInfo
+	err := DB.Table("applications").
+		Select("applications.id as id, users.user_name as user_name, users.telephone as telephone, cars.brand as brand").
+		Joins("join users on users.id = applications.user_id").
+		Joins("join cars on cars.id = applications.car_id").
+		Scan(&applications).Error
+	if err != nil {
+		return nil, err
 	}
+
 	return applications, nil
 }
 
-// GetAllApplications 获取我的Application
+type ApplicationInfo struct {
+	Class       string `json:"class"`
+	Description string `json:"description"`
+	Time        string `json:"time"`
+	IsEnd       int    `json:"is_end"`
+	UserName    string `json:"user_name"`
+	Telephone   string `json:"telephone"`
+}
+
 func GetMyApplications(userId int) ([]*ApplicationModel, error) {
 	var applications []*ApplicationModel
 	result := DB.Where("user_id = ?", userId).Find(&applications)
