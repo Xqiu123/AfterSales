@@ -39,6 +39,9 @@ func SendResponse(c *gin.Context, err error, data interface{}) {
 }
 
 func SendError(c *gin.Context, err error, data interface{}, cause string, source string) {
+	if cause == "" {
+		cause = err.Error()
+	}
 	log.Error("error",
 		zap.String("X-Request-Id", util.GetReqID(c)),
 		zap.String("cause", cause),
