@@ -5,27 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>个人中心</title>
     <style>
-        *{
+        * {
             padding: 0;
             margin: 0;
         }
 
-        .head{
+        .head {
             background-color: #333;
             display: flex;
             height: 80px;
             align-items: center;
         }
 
-        .icon{
+        .icon {
             margin-left: 30px;
         }
 
-        .icon img{
+        .icon img {
             width: 40px;
         }
 
-        .txt{
+        .txt {
             color: white;
             font-weight: 700;
             font-size: 40px;
@@ -34,7 +34,7 @@
             width: 200px;
         }
 
-        .txt1{
+        .txt1 {
             color: white;
             width: 200px;
         }
@@ -62,64 +62,121 @@
             border: 1px solid #cdcdcd;
         }
 
-        .sidebar a img{
+        .sidebar a img {
             height: 30px;
             margin-right: 10px;
             margin-left: 20px;
         }
 
-        .content{
+        .content {
             margin-left: 250px;
         }
 
-        .me{
-            margin-left: 150px;
+        .me {
+            margin-left: 120px;
+            margin-top: 120px;
             width: 400px;
             display: flex;
             flex-wrap: wrap;
             border: 1px solid #BBBBBB;
+            opacity: 0.8;
         }
 
-        .lis img{
+        .lis img {
             width: 25px;
             margin-right: 10px;
         }
 
-        .lis{
+        .lis {
             align-items: center;
             display: flex;
             width: 400px;
             height: 80px;
-            font-size: 25px;
-            background-color: rgba(255,255,255,0.6);
+            font-size: 20px;
+            background-color: rgba(255, 255, 255, 0.6);
             padding-left: 20px;
         }
 
-        .alter{
+        .alter {
             display: flex;
             align-items: center;
-            background-color: rgba(255,255,255,0.6);
+            background-color: rgba(255, 255, 255, 0.6);
             width: 400px;
             height: 400px;
-            font-size: 25px;
-            margin-left: 50px;
+            font-size: 20px;
+            margin-left: 100px;
             border: 1px solid #BBBBBB;
             margin-top: 100px;
         }
 
-        .alter form table tr{
-            height: 80px;
+        .alter form table tr {
+            height: 60px;
         }
 
-        .td{
-            margin-left: 20px;
+        .td {
+            padding-left: 50px;
         }
 
+        .btn {
+            margin-top: 20px;
+            color: white;
+            margin-left: 100px;
+            width: 60px;
+            height: 30px;
+            border: none;
+        }
+
+        .body {
+            margin-left: 10px;
+            width: 200px;
+            height: 30px;
+            font-size: 15px;
+            padding-left: 10px;
+            border: 1px solid #BBBBBB;
+        }
+
+        .body:focus {
+            outline: none;
+        }
+
+        #tableContainer table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .order{
+            background-color: rgba(255,255,255,0.7);
+        }
+
+        .cell {
+            padding: 8px;
+            text-align: center;
+            border: 1px solid #BBBBBB;
+            height: 60px;
+            width: 150px;
+        }
+
+        .title {
+            width: 150px;
+            height: 60px;
+            background-color: #BBBBBB;
+            border: 1px solid #A8A8A8;
+        }
+
+        .page2{
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .change{
+            
+        }
     </style>
 </head>
 <body>
 <div>
-    <img src="static/asset/img/系统组件及背景图/9.用户个人中心/背景图-用户个人中心.png" class="back" height="100%" width="100%" style="z-index: -1; position: fixed; opacity: 60%" />
+    <img src="static/asset/img/系统组件及背景图/9.用户个人中心/背景图-用户个人中心.png" class="back" height="100%" width="100%"
+         style="z-index: -1; position: fixed; opacity: 60%"/>
 </div>
 <div class="head">
     <div class="icon"><img src="static/asset/img/系统组件及背景图/9.用户个人中心/左箭头.png"></div>
@@ -152,7 +209,7 @@
     </div>
 
     <div class="content">
-<!--        个人信息-->
+        <!--        个人信息-->
         <div id="page1" style="display: flex; align-items: center;">
             <div class="me">
                 <div class="lis">
@@ -174,7 +231,7 @@
                     <table>
                         <tr>
                             <td class="td">昵称</td>
-                            <td><input disabled ="true" type="text" class="body" id="name" placeholder="请输入昵称"></td>
+                            <td><input type="text" class="body" id="name" placeholder="请输入昵称"></td>
                         </tr>
                         <tr>
                             <td class="td">性别</td>
@@ -185,29 +242,35 @@
                         </tr>
                         <tr>
                             <td class="td">密码</td>
-                            <td><input type="text" class="body" id="password"></td>
+                            <td><input type="text" class="body" id="code1"></td>
                         </tr>
                         <tr>
                             <td class="td">确认密码</td>
-                            <td><input type="text" class="body" id="ver_password"></td>
+                            <td><input type="text" class="body" id="code2"></td>
                         </tr>
 
                     </table>
-                    <button type="submit" class="btn">修改信息</button>
+                    <button id="alter" type="submit" class="btn" style="background-color:rgb(31,106,204); ">修改</button>
+                    <button id="quit" type="submit" class="btn" style="background-color:rgb(175,32,58);">退出</button>
                 </form>
             </div>
         </div>
-<!--        我的订单-->
-        <div id="page2" style="display: none;">
-            <h1>页面2的内容</h1>
-
+        <!--        我的订单-->
+        <div id="page2" style="display: none;" class="page2">
+            <div id="tableContainer"></div>
+            <div class="change">
+                <button onclick="previousPage()">上一页</button>
+                <span id="current">1</span>
+                <button onclick="nextPage()">下一页</button>
+            </div>
         </div>
-<!--        维修申请-->
+
+        <!--        维修申请-->
         <div id="page3" style="display: none;">
             <h1>页面3的内容</h1>
             <p>这是页面3的内容...</p>
         </div>
-<!--        试驾预约-->
+        <!--        试驾预约-->
         <div id="page4" style="display: none;">
             <h1>页面4的内容</h1>
 
@@ -230,7 +293,7 @@
                 <button id="nextPage">下一页</button>
             </div>
         </div>
-<!--        我的收藏-->
+        <!--        我的收藏-->
         <div id="page5" style="display: none;">
             <h1>页面5的内容</h1>
             <p>这是页面5的内容...</p>
@@ -239,63 +302,27 @@
     </div>
 </div>
 
-<script src="vue.js" ></script>
+<script src="vue.js"></script>
 <script>
-    // // 当文档加载完毕时执行
-    // $(document).ready(function() {
-    //     var currentPage = 1; // 当前页码
-    //     var pageSize = 10; // 每页显示的数据量
-    //
-    //     function fetchCars(page) {
-    //         $.getJSON(`/api/cars?page=${page}&pageSize=${pageSize}`, function(data) {
-    //             var tableBody = $('#carsTable tbody');
-    //             tableBody.empty(); // 清空表格当前内容
-    //             $.each(data, function(i, car) {
-    //                 tableBody.append(`<tr><td>${car.model}</td><td>${car.bookingTime}</td><td>${car.status}</td></tr>`);
-    //             });
-    //         });
-    //     }
-    //
-    //     // 初始加载
-    //     fetchCars(currentPage);
-    //
-    //     // 分页控制
-    //     $('#prevPage').click(function() {
-    //         if (currentPage > 1) {
-    //             currentPage--;
-    //             fetchCars(currentPage);
-    //             $('#currentPage').text(currentPage);
-    //         }
-    //     });
-    //
-    //     $('#nextPage').click(function() {
-    //         currentPage++;
-    //         fetchCars(currentPage);
-    //         $('#currentPage').text(currentPage);
-    //     });
-    // });
-    //
 
     const app = new Vue({
-        el:'#main',
-        data:{
-
-        },
-        methods:{
-            showContent(pageId,liId) {
+        el: '#main',
+        data: {},
+        methods: {
+            showContent(pageId, liId) {
                 var sidebar = document.querySelectorAll('.sidebar > a');
                 var pages = document.querySelectorAll('.content > div');
-                pages.forEach(function(page) {
+                pages.forEach(function (page) {
                     if (page.id === pageId) {
                         page.style.display = 'flex';
                     } else {
                         page.style.display = 'none';
                     }
                 });
-                sidebar.forEach(function (li){
-                    if (li.id === liId){
+                sidebar.forEach(function (li) {
+                    if (li.id === liId) {
                         li.style.backgroundColor = 'white';
-                    }else {
+                    } else {
                         li.style.backgroundColor = 'rgb(255,255,255,0.00000001)';
                     }
                 })
@@ -303,6 +330,117 @@
 
         }
     })
+
+    var alter = document.getElementById('alter');
+    // 修改个人信息
+    alter.onclick = function () {
+        var name = document.getElementById('name').value;
+        var gender = document.querySelector('input[name="gender"]:checked');
+        var code1 = document.getElementById('code1').value;
+        var code2 = document.getElementById('code2').value;
+
+        if (code1 != code2) {
+            alert('密码不匹配，请重新输入');
+            return;
+        }
+
+        Fetch('/user/signup', JSON.stringify({
+            name: name,
+            gender: gender,
+            password: code1
+        })).then(res => {
+            // token = res.token
+            // msg = res.msg
+
+            if (!token) { // 密码错误
+                console.log("密码错误")
+                alert("密码错误")
+            } else {
+                // 储存token
+                console.log(token)
+                localStorage.setItem('token', token)
+                // 跳转
+                self.location = 'person.html';
+            }
+        })
+    }
+    // 退出登录
+    document.getElementById('quit').addEventListener('click', function () {
+        fetch('/logout', {
+            method: 'POST',
+            // 如果使用了身份验证令牌或cookie，确保包含在请求中
+            credentials: 'include', // 对于cookies
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Authorization': 'Bearer ' + token // 对于令牌
+            }
+        })
+            .then(response => {
+                if (response.ok) {
+                    // 成功退出后的逻辑，比如跳转到登录页或显示成功消息
+                    window.location.href = '/login'; // 重定向到登录页面
+                } else {
+                    // 处理错误情况
+                    console.error('退出失败');
+                }
+            })
+            .catch(error => {
+                // 网络或其他错误处理
+                console.error('请求错误', error);
+            });
+    });
+
+    // 我的订单
+    var current = 1;
+    var pageSize = 5;
+    var data = [
+        // 示例数据
+        {"brand": "Alice", "name": 25, "price": 1111, "color": "黑色", "style": "前驱"},
+        {"brand": "Bob", "name": 24, "price": 2222, "color": "白色", "style": "前驱"},
+        {"brand": "Bob", "name": 24, "price": 2222, "color": "白色", "style": "前驱"},
+        {"brand": "Bob", "name": 24, "price": 2222, "color": "白色", "style": "前驱"},
+        {"brand": "Bob", "name": 24, "price": 2222, "color": "白色", "style": "前驱"},
+        {"brand": "Bob", "name": 24, "price": 2222, "color": "白色", "style": "前驱"},
+        {"brand": "Bob", "name": 24, "price": 2222, "color": "白色", "style": "前驱"},
+        {"brand": "Bob", "name": 24, "price": 2222, "color": "白色", "style": "前驱"},
+        {"brand": "Bob", "name": 24, "price": 2222, "color": "白色", "style": "前驱"},
+        {"brand": "Bob", "name": 24, "price": 2222, "color": "白色", "style": "前驱"}
+        // ...更多数据
+    ];
+
+    function renderTable(page) {
+        var start = (page - 1) * pageSize;
+        var end = start + pageSize;
+        var slicedData = data.slice(start, end);
+
+        var table = '<table class="order"><tr><th class="title">品牌</th><th class="title">车型</th><th class="title">厂商指导价</th><th class="title">颜色</th><th class="title">驱动方式</th></tr>';
+        slicedData.forEach(function (row) {
+            table += '<tr><td class="cell">' + row.brand + '</td><td class="cell">' + row.name + '</td><td class="cell">' + row.price + '</td><td class="cell">' + row.color + '</td><td class="cell">' + row.style + '</td></tr>';
+        });
+        table += '</table>';
+
+        document.getElementById('tableContainer').innerHTML = table;
+        document.getElementById('current').innerText = current;
+    }
+
+    function previousPage() {
+        if (current > 1) {
+            current -= 1;
+            renderTable(current);
+        }
+    }
+
+    function nextPage() {
+        if ((current * pageSize) < data.length) {
+            current += 1;
+            renderTable(current);
+        }
+    }
+
+    // 初始渲染
+    renderTable(current);
+
+
 </script>
 </body>
 </html>

@@ -3,463 +3,469 @@
 <head>
     <meta charset="UTF-8">
     <title>车e优助</title>
-  <style>
-      *{
-          padding: 0;
-          margin: 0;
-      }
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
 
-    .head{
-      display: flex;
-      /*background-color: pink;*/
-      height: 120px;
-      align-items: center;
-    }
+        .head {
+            display: flex;
+            /*background-color: pink;*/
+            height: 120px;
+            align-items: center;
+        }
 
-    .title{
-      color: #347CAF;
-      font-size: 45px;
-      font-family: 华文楷体;
-      letter-spacing: 10px;
-    }
+        .title {
+            color: #347CAF;
+            font-size: 45px;
+            font-family: 华文楷体;
+            letter-spacing: 10px;
+        }
 
-    .title1{
-      color: black;
-      font-family: 华文楷体;
-    }
+        .title1 {
+            color: black;
+            font-family: 华文楷体;
+        }
 
-    .search{
-      margin-left: 100px;
-      width: 430px;
-      height: 50px;
-      background-color: white;
-      display: flex;
-      align-items: center;
-      border: 1px solid grey;
-      border-radius: 25px;
-    }
+        .search {
+            margin-left: 100px;
+            width: 430px;
+            height: 50px;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            border: 1px solid grey;
+            border-radius: 25px;
+        }
 
-    .icon{
-      width: 20px;
-    }
+        .icon {
+            width: 20px;
+        }
 
-    .in{
-      margin-left: 10px;
-      width: 300px;
-      height: 40px;
-      border: 0;
-    }
+        .in {
+            margin-left: 10px;
+            width: 300px;
+            height: 40px;
+            border: 0;
+        }
 
-    input:focus{
-      outline: none;
-    }
+        input:focus {
+            outline: none;
+        }
 
-    .btn{
-      margin-left: 10px;
-      height: 50px;
-      width: 86px;
-      border-radius: 25px;
-      border: 0;
-      background-color: #1684FC;
-      color: white;
-      font-size: 15px;
-    }
+        .btn {
+            margin-left: 10px;
+            height: 50px;
+            width: 86px;
+            border-radius: 25px;
+            border: 0;
+            background-color: #1684FC;
+            color: white;
+            font-size: 15px;
+        }
 
-    .me{
-      color: #347CAF;
-      font-size: 25px;
-      margin-left: 400px;
-    }
+        .me {
+            color: #347CAF;
+            font-size: 25px;
+            margin-left: 400px;
+            text-decoration: none;
+        }
 
-    .banner{
-      height: 500px;
-      background-color: #F5F5F5;
-      display: flex;
-      justify-content: center;
-    }
+        .banner {
+            height: 500px;
+            background-color: #F5F5F5;
+            display: flex;
+            justify-content: center;
+        }
 
-    .box{
-      width: 700px;
-      height: 500px;
-      overflow: hidden;
-      position: relative;
-    }
+        .box {
+            width: 700px;
+            height: 500px;
+            overflow: hidden;
+            position: relative;
+        }
 
-    li{
-      list-style-type: none;
-    }
+        li {
+            list-style-type: none;
+        }
 
-    .pic {
-        padding: 0;
-        margin: 0;
-        display: flex;
-        transition: transform 0.5s ease-in-out;
-    }
+        .pic {
+            padding: 0;
+            margin: 0;
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
 
-    .slide {
-        flex: 0 0 100%;
-        max-width: 100%;
-    }
+        .slide {
+            flex: 0 0 100%;
+            max-width: 100%;
+        }
 
-    .slide img {
-        width: 700px;
-        height: 500px;
-    }
+        .slide img {
+            width: 700px;
+            height: 500px;
+        }
 
-    .prev-btn, .next-btn {
-        cursor: pointer;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-30%);
-        background-color: rgba(0, 0, 0, 0.5);
-        color: #fff;
-        padding: 10px 15px;
-        border: none;
-        outline: none;
-        z-index: 1;
-        display: none;
-    }
+        .prev-btn, .next-btn {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-30%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            outline: none;
+            z-index: 1;
+            display: none;
+        }
 
-    .prev-btn {
-        left: 0;
-    }
+        .prev-btn {
+            left: 0;
+        }
 
-    .prev-btn img{
-        width: 30px;
-    }
+        .prev-btn img {
+            width: 30px;
+        }
 
-    .next-btn {
-        right: 0;
-    }
+        .next-btn {
+            right: 0;
+        }
 
-    .next-btn img{
-        width: 30px;
-    }
+        .next-btn img {
+            width: 30px;
+        }
 
-    .rank1{
-        margin-left: 10px;
-        height: 500px;
-        width: 270px;
-        background-color: white;
-    }
+        .rank1 {
+            margin-left: 10px;
+            height: 500px;
+            width: 270px;
+            background-color: white;
+        }
 
-    .rank2{
-        margin-left: 10px;
-        height: 500px;
-        width: 250px;
-        background-color: white;
-    }
+        .rank2 {
+            margin-left: 10px;
+            height: 500px;
+            width: 250px;
+            background-color: white;
+        }
 
-    .head1{
-        background-image: linear-gradient(270deg,#ff9651,#f60);
-        height: 30px;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        line-height: 30px;
-        border-radius: 4px;
-    }
+        .head1 {
+            background-image: linear-gradient(270deg, #ff9651, #f60);
+            height: 30px;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            line-height: 30px;
+            border-radius: 4px;
+        }
 
-    .head2{
-        background-image: linear-gradient(90deg,#0057ff,#3874ff);
-        height: 30px;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        line-height: 30px;
-        border-radius: 4px;
-    }
+        .head2 {
+            background-image: linear-gradient(90deg, #0057ff, #3874ff);
+            height: 30px;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            line-height: 30px;
+            border-radius: 4px;
+        }
 
-    .list{
-        padding-left: 10px;
-        display: flex;
-        border-bottom: 1px solid #EDEDED;
-        align-items: center;
-        height: 46px;
-    }
+        .list {
+            padding-left: 10px;
+            display: flex;
+            border-bottom: 1px solid #EDEDED;
+            align-items: center;
+            height: 46px;
+        }
 
-    .num_t{
-        color: #f60;
-        font-weight: 700;
-        font-size: 20px;
-        margin-right: 10px;
-    }
+        .num_t {
+            color: #f60;
+            font-weight: 700;
+            font-size: 20px;
+            margin-right: 10px;
+        }
 
-    .num{
-        color: #666d7f;
-        font-weight: 700;
-        margin-right: 10px;
-    }
+        .num {
+            color: #666d7f;
+            font-weight: 700;
+            margin-right: 10px;
+        }
 
-    .num1{
-        color: #666d7f;
-        font-weight: 700;
-        margin-right: 20px;
-    }
+        .num1 {
+            color: #666d7f;
+            font-weight: 700;
+            margin-right: 20px;
+        }
 
-    .name{
-        font-weight: 700;
-    }
+        .name {
+            font-weight: 700;
+        }
 
-      .num_tn{
-          color: #3874ff;
-          font-weight: 700;
-          font-size: 20px;
-          margin-right: 20px;
-      }
+        .num_tn {
+            color: #3874ff;
+            font-weight: 700;
+            font-size: 20px;
+            margin-right: 20px;
+        }
 
-    .sum{
-        font-size: 15px;
-        margin-left: 40px;
-    }
+        .sum {
+            font-size: 15px;
+            margin-left: 40px;
+        }
 
-    .main{
-        display: flex;
-        background-color: pink;
-        margin-top: 20px;
-        justify-content: center;
-    }
+        .main {
+            display: flex;
+            background-color: pink;
+            margin-top: 20px;
+            justify-content: center;
+        }
 
-    .nav{
-        background-color: #F7F7F7;
-    }
+        .nav {
+            background-color: #F7F7F7;
+        }
 
-    .nav ul li{
-        display: flex;
-        height: 50px;
-        width: 120px;
-        align-items: center;
-        cursor: pointer;
-    }
+        .nav ul li {
+            display: flex;
+            height: 50px;
+            width: 120px;
+            line-height: 50px;
+            cursor: pointer;
+        }
 
-    .nav ul li img{
-        margin-left: 10px;
-        width: 18px;
-    }
+        .nav ul li img {
+            margin-left: 10px;
+            width: 18px;
+        }
 
-    .nav ul li .txt{
-        padding-left: 10px;
-    }
+        .nav ul li .txt {
+            padding-left: 10px;
+        }
 
-      .dropdown-content {
-          display: none;
-          position: absolute;
-          background-color: #f9f9f9;
-          min-width: 150px;
-          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-          z-index: 1;
-      }
+        .content {
+            background-color: #ADCFEA;
+            width: 700px;
+        }
 
-      .dropdown-content a {
-          padding: 12px 16px;
-          text-decoration: none;
-          display: block;
-          color: #333;
-      }
+        .frame {
+            display: flex;
+            flex-wrap: wrap;
+        }
 
-      .dropdown-content a:hover {
-          background-color: #ddd;
-      }
+        .menu {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            width: 200px;
+        }
 
-    .body{
-        background-color: #ADCFEA;
-        width: 700px;
-    }
+        .submenu {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: none;
+        }
 
-  </style>
+        .submenu_li {
+            padding: 5px 10px;
+            background-color: #e0e0e0;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .menu > li {
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
 <!--头部区域-->
-  <div class="head">
+<div class="head">
     <div style="display: flex; justify-content: center; flex-wrap: wrap; width: 200px; align-items: center; margin-left: 30px">
-      <div class="title"><strong><em>车e优助</em></strong></div>
-      <div class="title1"><strong>看车·买车·用车</strong></div>
+        <div class="title"><strong><em>车e优助</em></strong></div>
+        <div class="title1"><strong>看车·买车·用车</strong></div>
     </div>
     <div class="search">
       <span style="margin-left: 10px">
         <img src="static/asset/img/系统组件及背景图/3.用户主页/搜索.png" class="icon">
       </span>
-      <input type="text" placeholder="搜一搜" class="in">
-      <button class="btn">搜索</button>
+        <input type="text" placeholder="搜一搜" class="in">
+        <button class="btn">搜索</button>
     </div>
-    <div class="me"><strong>个人中心</strong></div>
-  </div>
-
-
+    <div><a href="person.html" class="me"><strong>个人中心</strong></a></div>
+</div>
 
 
 <!--轮播区域-->
- <div class="banner">
-<!--   轮播图-->
-     <div class="box" onmouseenter="showButtons()" onmouseleave="hideButtons()">
-         <div class="pic">
-             <div class="slide">
-                 <img src="static/asset/img/轮播图/保时捷2014Boxster.jpg" alt="Image 1">
-             </div>
-             <div class="slide">
-                 <img src="static/asset/img/轮播图/奔驰C级%202015款%20C%20300%20L%20运动型.jpg" alt="Image 2">
-             </div>
-             <div class="slide">
-                 <img src="static/asset/img/轮播图/奥迪Q3%202016款%2030%20TFSI%20典藏版%20智领型.jpg" alt="Image 3">
-             </div>
-             <div class="slide">
-                 <img src="static/asset/img/轮播图/悦翔V7%202015款%201.6L%20手动乐动型%20国IV.jpg" alt="Image 3">
-             </div>
-             <div class="slide">
-                 <img src="static/asset/img/轮播图/途观%202016款%20330TSI%20自动四驱旗舰版.jpg" alt="Image 3">
-             </div>
-         </div>
-         <button class="prev-btn" onclick="prevSlide()"><img src="static/asset/img/系统组件及背景图/3.用户主页/左箭头-.png"></button>
-         <button class="next-btn" onclick="nextSlide()"><img src="static/asset/img/系统组件及背景图/3.用户主页/右箭头(1).png"></button>
-     </div>
+<div class="banner">
+    <!--   轮播图-->
+    <div class="box" onmouseenter="showButtons()" onmouseleave="hideButtons()">
+        <div class="pic">
+            <div class="slide">
+                <img src="static/asset/img/轮播图/保时捷2014Boxster.jpg" alt="Image 1">
+            </div>
+            <div class="slide">
+                <img src="static/asset/img/轮播图/奔驰C级%202015款%20C%20300%20L%20运动型.jpg" alt="Image 2">
+            </div>
+            <div class="slide">
+                <img src="static/asset/img/轮播图/奥迪Q3%202016款%2030%20TFSI%20典藏版%20智领型.jpg" alt="Image 3">
+            </div>
+            <div class="slide">
+                <img src="static/asset/img/轮播图/悦翔V7%202015款%201.6L%20手动乐动型%20国IV.jpg" alt="Image 3">
+            </div>
+            <div class="slide">
+                <img src="static/asset/img/轮播图/途观%202016款%20330TSI%20自动四驱旗舰版.jpg" alt="Image 3">
+            </div>
+        </div>
+        <button class="prev-btn" onclick="prevSlide()"><img src="static/asset/img/系统组件及背景图/3.用户主页/左箭头-.png"></button>
+        <button class="next-btn" onclick="nextSlide()"><img src="static/asset/img/系统组件及背景图/3.用户主页/右箭头(1).png"></button>
+    </div>
 
 
-<!--   销量榜-->
-   <div class="rank1">
-       <div class="head1">
-           <span>销量榜</span>
-       </div>
-       <ul>
-           <li class="list">
-               <div class="num_t"><em>1</em></div>
-                <div class="name">宝马3系 2016款 316i 时尚型</div>
-           </li>
-           <li class="list">
-               <div class="num_t"><em>2</em></div>
-               <div class="name">奥迪Q3 2016款 30 TFSI 典藏版 智领型</div>
-           </li>
-           <li class="list">
-               <div class="num_t"><em>3</em></div>
-               <div class="name">悦动 2015款 1.6L 手动舒适型</div>
-           </li>
-           <li class="list">
-               <div class="num">4</div>
-               <div class="name">Boxster 2014款 Boxster GTS 3.4L</div>
-           </li>
-           <li class="list">
-               <div class="num">5</div>
-               <div class="name">宝马3系 2015款 320Li 豪华设计套装</div>
-           </li>
-           <li class="list">
-               <div class="num">6</div>
-               <div class="name">奔驰C级 2015款 C 300 L</div>
-           </li>
-           <li class="list">
-               <div class="num">7</div>
-               <div class="name">POLO 2014款 1.4L 自动舒适版</div>
-           </li>
-           <li class="list">
-               <div class="num">8</div>
-               <div class="name">逸动 2015款 纯电动尊贵型</div>
-           <li class="list">
-               <div class="num">9</div>
-               <div class="name">揽胜运动版 2016款 3.0 SD V6 Hybrid HSE Dynamic</div>
-           </li>
-           <li class="list">
-               <div class="num">10</div>
-               <div class="name">指南者 2015款 2.0L 两驱运动版</div>
-           </li>
-       </ul>
-   </div>
-<!--   品牌榜-->
-   <div class="rank2">
-       <div class="head2">
-           <span>品牌榜</span>
-       </div>
-       <ul>
-           <li class="list">
-               <div class="num_tn"><em>1</em></div>
-               <div class="name">宝马</div>
-               <div class="sum">217241辆</div>
-           </li>
-           <li class="list">
-               <div class="num_tn"><em>2</em></div>
-               <div class="name">奥迪</div>
-               <div class="sum">192398辆</div>
-           </li>
-           <li class="list">
-               <div class="num_tn"><em>3</em></div>
-               <div class="name">现代</div>
-               <div class="sum">139071辆</div>
-           </li>
-           <li class="list">
-               <div class="num1">4</div>
-               <div class="name">保时捷</div>
-               <div class="sum">105713辆</div>
-           </li>
-           <li class="list">
-               <div class="num1">5</div>
-               <div class="name">大众</div>
-               <div class="sum">79855辆</div>
-           </li>
-           <li class="list">
-               <div class="num1">6</div>
-               <div class="name">福特</div>
-               <div class="sum">79493辆</div>
-           </li>
-           <li class="list">
-               <div class="num1">7</div>
-               <div class="name">奔驰</div>
-               <div class="sum">73803辆</div>
-           </li>
-           <li class="list">
-               <div class="num1">8</div>
-               <div class="name">Jeep</div>
-               <div class="sum">65436辆</div>
-           </li>
-           <li class="list">
-               <div class="num1">9</div>
-               <div class="name">路虎</div>
-               <div class="sum">65410</div>
-           </li>
-           <li class="list">
-               <div class="num1">10</div>
-               <div class="name">长安</div>
-               <div class="sum">61794辆</div>
-           </li>
-       </ul>
-   </div>
- </div>
-
-<div class="main" id="main">
-<!--    导航栏-->
-    <div class="nav">
+    <!--   销量榜-->
+    <div class="rank1">
+        <div class="head1">
+            <span>销量榜</span>
+        </div>
         <ul>
-            <li v-for="(item, index) in list1" :key = "item.id"  @click="ShowOption(item.id)">
-                <span>
-                    <img :src="item.image">
-                </span>
-                <span class="txt">
-                    {{ item.name }}
-                </span>
-                <div class="dropdown-content" id="dropdownMenu">
-                    <a href="#">选项1</a>
-                    <a href="#">选项2</a>
-                    <a href="#">选项3</a>
-                    <a href="#">选项4</a>
-                </div>
+            <li class="list">
+                <div class="num_t"><em>1</em></div>
+                <div class="name">宝马3系 2016款 316i 时尚型</div>
+            </li>
+            <li class="list">
+                <div class="num_t"><em>2</em></div>
+                <div class="name">奥迪Q3 2016款 30 TFSI 典藏版 智领型</div>
+            </li>
+            <li class="list">
+                <div class="num_t"><em>3</em></div>
+                <div class="name">悦动 2015款 1.6L 手动舒适型</div>
+            </li>
+            <li class="list">
+                <div class="num">4</div>
+                <div class="name">Boxster 2014款 Boxster GTS 3.4L</div>
+            </li>
+            <li class="list">
+                <div class="num">5</div>
+                <div class="name">宝马3系 2015款 320Li 豪华设计套装</div>
+            </li>
+            <li class="list">
+                <div class="num">6</div>
+                <div class="name">奔驰C级 2015款 C 300 L</div>
+            </li>
+            <li class="list">
+                <div class="num">7</div>
+                <div class="name">POLO 2014款 1.4L 自动舒适版</div>
+            </li>
+            <li class="list">
+                <div class="num">8</div>
+                <div class="name">逸动 2015款 纯电动尊贵型</div>
+            <li class="list">
+                <div class="num">9</div>
+                <div class="name">揽胜运动版 2016款 3.0 SD V6 Hybrid HSE Dynamic</div>
+            </li>
+            <li class="list">
+                <div class="num">10</div>
+                <div class="name">指南者 2015款 2.0L 两驱运动版</div>
             </li>
         </ul>
     </div>
-<!--    内容-->
-    <div class="body">
-        <div >
-<!--            图片-->
-            <div></div>
-<!--            名称-->
-            <div></div>
+    <!--   品牌榜-->
+    <div class="rank2">
+        <div class="head2">
+            <span>品牌榜</span>
+        </div>
+        <ul>
+            <li class="list">
+                <div class="num_tn"><em>1</em></div>
+                <div class="name">宝马</div>
+                <div class="sum">217241辆</div>
+            </li>
+            <li class="list">
+                <div class="num_tn"><em>2</em></div>
+                <div class="name">奥迪</div>
+                <div class="sum">192398辆</div>
+            </li>
+            <li class="list">
+                <div class="num_tn"><em>3</em></div>
+                <div class="name">现代</div>
+                <div class="sum">139071辆</div>
+            </li>
+            <li class="list">
+                <div class="num1">4</div>
+                <div class="name">保时捷</div>
+                <div class="sum">105713辆</div>
+            </li>
+            <li class="list">
+                <div class="num1">5</div>
+                <div class="name">大众</div>
+                <div class="sum">79855辆</div>
+            </li>
+            <li class="list">
+                <div class="num1">6</div>
+                <div class="name">福特</div>
+                <div class="sum">79493辆</div>
+            </li>
+            <li class="list">
+                <div class="num1">7</div>
+                <div class="name">奔驰</div>
+                <div class="sum">73803辆</div>
+            </li>
+            <li class="list">
+                <div class="num1">8</div>
+                <div class="name">Jeep</div>
+                <div class="sum">65436辆</div>
+            </li>
+            <li class="list">
+                <div class="num1">9</div>
+                <div class="name">路虎</div>
+                <div class="sum">65410辆</div>
+            </li>
+            <li class="list">
+                <div class="num1">10</div>
+                <div class="name">长安</div>
+                <div class="sum">61794辆</div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="main" id="main">
+    <!--    导航栏-->
+    <div class="nav">
+        <ul class="menu">
+            <li v-for="(item, index) in list1" :key="item.id"
+                @click="() => { ShowOption(item.id); ShowContent(item.id); toggleDropdown();}">
+                <div>
+                    <img :src="item.image">
+                </div>
+                <div class="txt">
+                    {{ item.name }}
+                </div>
+                <ul class="submenu">
+                    <li v-for="(item, index) in detail" :key="item.id" class="submenu_li" @click="ShowDetail(item.id)">
+                        {{ item.name }}
+                    </li>
+                </ul>
+
+            </li>
+        </ul>
+    </div>
+    <!--    内容-->
+    <div class="content">
+        <div class="frame">
         </div>
     </div>
+</div>
 
 </div>
 
 
-
-
 <!--引入的是开发版本包-->
-<script src="vue.js" ></script>
+<script src="vue.js"></script>
 <script>
 
     let currentSlide = 0;
@@ -525,33 +531,129 @@
     showSlide(currentSlide);
 
 
+    // 获取所有主菜单项
+    var menuItems = document.querySelectorAll('.menu > li');
+
+    // 为每个主菜单项添加点击事件监听器
+    menuItems.forEach(function (menuItem) {
+        menuItem.addEventListener('click', function () {
+            // 查找当前主菜单项下的子菜单
+            var submenu = this.querySelector('.submenu');
+
+            // 切换子菜单的显示和隐藏
+            if (submenu.style.display === 'block') {
+                submenu.style.display = 'none';
+            } else {
+                submenu.style.display = 'block';
+            }
+        });
+    });
+
+    let detail;
+
     const app = new Vue({
-        el:'#main',
-        data:{
+        el: '#main',
+        data: {
             index: 0,
-            list1:[
-                {id: 1, name: '奥迪', image: '系统组件及背景图/系统组件及背景图/4.用户主页-车型/奥迪.png', url1:'image/aodi1.jpg', url2:'image/aodi2.jpg', url3:'image/aodi3.jpg', url4:'image/aodi4.jpg', url5:'image/aodi5.jpeg'},
-                {id: 2, name: '宝马', image: '系统组件及背景图/系统组件及背景图/4.用户主页-车型/宝马.png', url1:'image/baoma1.jpg', url2:'image/baoma2.jpg', url3:'image/baoma3.jpg', url4:'image/baoma4.jpg', url5:'image/baoma5.jpg'},
-                {id: 3, name: '保时捷', image: '系统组件及背景图/系统组件及背景图/4.用户主页-车型/奥迪.png', url1:'image/aodi1.jpg', url2:'image/aodi2.jpg', url3:'image/aodi3.jpg', url4:'image/aodi4.jpg', url5:'image/aodi5.jpeg'},
-                {id: 4, name: '奔驰', image: '系统组件及背景图/系统组件及背景图/4.用户主页-车型/奥迪.png', url1:'image/aodi1.jpg', url2:'image/aodi2.jpg', url3:'image/aodi3.jpg', url4:'image/aodi4.jpg', url5:'image/aodi5.jpeg'},
-                {id: 5, name: '长安', image: '系统组件及背景图/系统组件及背景图/4.用户主页-车型/奥迪.png', url1:'image/aodi1.jpg', url2:'image/aodi2.jpg', url3:'image/aodi3.jpg', url4:'image/aodi4.jpg', url5:'image/aodi5.jpeg'},
-                {id: 6, name: '大众', image: '系统组件及背景图/系统组件及背景图/4.用户主页-车型/奥迪.png', url1:'image/aodi1.jpg', url2:'image/aodi2.jpg', url3:'image/aodi3.jpg', url4:'image/aodi4.jpg', url5:'image/aodi5.jpeg'},
-                {id: 7, name: '东风', image: '系统组件及背景图/系统组件及背景图/4.用户主页-车型/奥迪.png', url1:'image/aodi1.jpg', url2:'image/aodi2.jpg', url3:'image/aodi3.jpg', url4:'image/aodi4.jpg', url5:'image/aodi5.jpeg'},
-                {id: 8, name: '福特', image: '系统组件及背景图/系统组件及背景图/4.用户主页-车型/奥迪.png', url1:'image/aodi1.jpg', url2:'image/aodi2.jpg', url3:'image/aodi3.jpg', url4:'image/aodi4.jpg', url5:'image/aodi5.jpeg'},
-                {id: 9, name: 'Jeep', image: '系统组件及背景图/系统组件及背景图/4.用户主页-车型/奥迪.png', url1:'image/aodi1.jpg', url2:'image/aodi2.jpg', url3:'image/aodi3.jpg', url4:'image/aodi4.jpg', url5:'image/aodi5.jpeg'},
-                {id: 10, name: '路虎', image: '系统组件及背景图/系统组件及背景图/4.用户主页-车型/奥迪.png', url1:'image/aodi1.jpg', url2:'image/aodi2.jpg', url3:'image/aodi3.jpg', url4:'image/aodi4.jpg', url5:'image/aodi5.jpeg'},
-                {id: 11, name: '现代', image: '系统组件及背景图/系统组件及背景图/4.用户主页-车型/奥迪.png', url1:'image/aodi1.jpg', url2:'image/aodi2.jpg', url3:'image/aodi3.jpg', url4:'image/aodi4.jpg', url5:'image/aodi5.jpeg'}
+            list1: [
+                {id: 1, name: '奥迪', image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/奥迪.png'},
+                {id: 2, name: '宝马', image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/宝马.png'},
+                {id: 3, name: '保时捷', image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/保时捷.png'},
+                {id: 4, name: '奔驰', image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/奔驰.png'},
+                {id: 5, name: '长安', image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/长安.png'},
+                {id: 6, name: '大众', image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/大众.png'},
+                {id: 7, name: '东风', image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/东风.png'},
+                {id: 8, name: '福特', image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/福特.png'},
+                {id: 9, name: 'Jeep', image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/Jeep.png'},
+                {id: 10, name: '路虎', image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/路虎.png'},
+                {id: 11, name: '现代', image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/现代.png'}
             ]
         },
-        methods:{
-            ShowOption(id){
-                var dropdownMenu = document.getElementById("dropdownMenu");
-                if (dropdownMenu.style.display === "block") {
-                    dropdownMenu.style.display = "none";
-                } else {
-                    dropdownMenu.style.display = "block";
-                }
-            }
+        methods: {
+            ShowContent(id) {
+                Fetch('/movie/label', JSON.stringify({
+                    label: list[id].name
+                }))
+                    .then(res => {
+                        detail = res.list;
+                        console.log(detail.name);
+                        list = res.list
+                        msg = res.msg
+
+                        var main = document.querySelector(".frame");
+                        for (let i = 0; i < list.length; i++) {
+                            var div = document.createElement('div');
+                            var img = document.createElement('img');
+                            img.src = list[i].image
+                            var name = document.createElement('b')
+                            img.className = "pic"
+                            name.innerHTML = list[i].name
+                            div.appendChild(img);
+                            var br = document.createElement('br')
+                            div.appendChild(br);
+                            div.appendChild(name);
+                            div.className = "each";
+                            main.appendChild(div);
+                            div.click(function () {
+                                localStorage.setItem('car_id', list[i].id)
+                                self.location = 'car_detail'
+
+
+                            })
+                        }
+                    })
+
+            },
+            ShowDetail(id) {
+                        var car_detail = detail[(id%5)-1];
+                        var main = document.querySelector(".frame");
+                        // 图片和名字
+                        var left = document.createElement('div');
+                        var img = document.createElement('img');
+                        img.src = car_detail.image
+                        img.className = "pic"
+                        var name = document.createElement('b')
+                        name.innerHTML = car_detail.name
+                        left.appendChild(img);
+                        var br = document.createElement('br')
+                        left.appendChild(br);
+                        left.appendChild(name);
+
+                        // 详细信息
+                        var right = document.createElement('div');
+                        var ul = document.createElement('ul');
+                        var li1 = document.createElement('li');
+                        var li2= document.createElement('li');
+                        var li3 = document.createElement('li');
+                        var li4 = document.createElement('li');
+                        var li5 = document.createElement('li');
+                        var li6 = document.createElement('li');
+                        var li7 = document.createElement('li');
+                        var li8 = document.createElement('li');
+                        var li9 = document.createElement('li');
+                        li1.innerHTML = '厂商指导价' + car_detail.price;
+                        li2.innerHTML = '颜色' + car_detail.color;
+                        li3.innerHTML = '长宽高（cm）' + car_detail.size;
+                        li4.innerHTML = '发动机' + car_detail.motor;
+                        li5.innerHTML = '变速箱' + car_detail.gearbox;
+                        li6.innerHTML = '最大马力（Ps）' + car_detail.maxhorse;
+                        li7.innerHTML = '最大功率（kW）' + car_detail.maxpower;
+                        li8.innerHTML = '驱动方式' + car_detail.drive_mode;
+                        li9.innerHTML = '供油方式' + car_detail.fuel;
+                        ul.appendChild(li1);
+                        ul.appendChild(li2);
+                        ul.appendChild(li3);
+                        ul.appendChild(li4);
+                        ul.appendChild(li5);
+                        ul.appendChild(li6);
+                        ul.appendChild(li7);
+                        ul.appendChild(li8);
+                        ul.appendChild(li9);
+                        right.appendChild(ul);
+                        main.appendChild(right);
+                        main.appendChild(left);
+                    }
+
         }
     })
 </script>
