@@ -48,9 +48,9 @@ CREATE TABLE collections
 (
     id int NOT NULL PRIMARY KEY,
     user_id int NOT NULL,
-    car_id int NOT NULL,
-    FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-    FOREIGN KEY (`car_id`) REFERENCES `cars` (`id`)
+    car_id int NOT NULL
+#     FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+#     FOREIGN KEY (`car_id`) REFERENCES `cars` (`id`)
 );
 
 DROP TABLE IF EXISTS orders;
@@ -58,9 +58,9 @@ CREATE TABLE orders
 (
     id int NOT NULL PRIMARY KEY,
     user_id int NOT NULL,
-    car_id int NOT NULL,
-    FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
-    FOREIGN KEY (`car_id`) REFERENCES `cars` (`id`)
+    car_id int NOT NULL
+#     FOREIGN KEY (`user_id`) REFERENCES `users` (`id`),
+#     FOREIGN KEY (`car_id`) REFERENCES `cars` (`id`)
 );
 
 INSERT INTO cars VALUES(1, '奥迪', '奥迪Q3 2015款 30 TFSI 标准型', '‪‪./image/aodi1.jpg', '24.98万', '黑色', '4385*1831*1589', '1.4T 150马力 L4', '6挡手动', '150', '110', '前置前驱', '汽油');
@@ -129,5 +129,47 @@ INSERT INTO cars VALUES(53, '现代', '途胜 2013款 2.0L 自动两驱舒适型
 INSERT INTO cars VALUES(54, '现代', '悦动 2015款 1.6L 手动舒适型', './image/xiandai4.jpg', '9.98万', '黑色', '4543*1777*1490', '1.6L 123马力 L4', '5挡手动', '123', '90.4', '前置前驱', '汽油');
 INSERT INTO cars VALUES(55, '现代', '悦动 2015款 1.6L 自动舒适型',  './image/xiandai5.jpg', '10.98万', '黑色', '4543*1777*1490', '1.6L 123马力 L4', '4挡自动', '123', '90.4', '前置前驱', '汽油');
 
+-- 申请信息 applications
+insert into applications values (1,1,1,'美容保养','镀膜','2024-1-2',0);
+insert into applications values (2,3,18,'试驾预约','','2024-1-5',1);
+insert into applications values (3,4,5,'美容保养','打蜡','2024-1-3',0);
+insert into applications values (4,6,19,'试驾预约','','2024-1-2',1);
+insert into applications values (5,10,22,'美容保养','抛光','2024-1-1',1);
+insert into applications values (6,7,8,'车辆维修','修理发动机','2024-1-6',1);
+insert into applications values (7,8,22,'试驾预约','','2024-1-8',0);
+insert into applications values (8,4,4,'美容保养','镀膜','2024-1-2',0);
+insert into applications values (9,15,27,'试驾预约','','2024-1-7',0);
+insert into applications values (10,10,23,'车辆维修','修理雨刷','2024-1-3',0);
+insert into applications values (11,13,34,'试驾预约','','2024-1-7',1);
+insert into applications values (12,9,21,'美容保养','打蜡','2024-1-2',1);
+insert into applications values (13,6,7,'车辆维修','修理车胎','2024-1-3',1);
 
+-- 收藏 collections
+INSERT INTO collections VALUES(1, 1, 16);
+INSERT INTO collections VALUES(2, 1, 17);
+INSERT INTO collections VALUES(3, 1, 18);
+INSERT INTO collections VALUES(4, 1, 19);
+INSERT INTO collections VALUES(5, 1, 20);
+INSERT INTO collections VALUES(6, 2, 21);
+INSERT INTO collections VALUES(7, 2, 22);
+INSERT INTO collections VALUES(8, 3, 23);
+INSERT INTO collections VALUES(9, 4, 24);
+INSERT INTO collections VALUES(10, 5, 25);
+INSERT INTO collections VALUES(11, 6, 26);
+INSERT INTO collections VALUES(12, 7, 27);
+
+-- 订单 orders
+INSERT INTO orders VALUES(1, 1, 1);
+INSERT INTO orders VALUES(2, 2, 2);
+INSERT INTO orders VALUES(3, 2, 3);
+INSERT INTO orders VALUES(4, 4, 4);
+INSERT INTO orders VALUES(5, 4, 5);
+INSERT INTO orders VALUES(6, 5, 6);
+INSERT INTO orders VALUES(7, 6, 7);
+INSERT INTO orders VALUES(8, 7, 8);
+INSERT INTO orders VALUES(9, 8, 9);
+INSERT INTO orders VALUES(10, 9, 20);
+INSERT INTO orders VALUES(11, 9, 21);
+INSERT INTO orders VALUES(12, 10, 22);
+INSERT INTO orders VALUES(13, 10, 23);
 
