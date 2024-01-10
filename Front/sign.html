@@ -121,7 +121,7 @@
                 </th>
                 <td class="">
                     <input type="radio" name="gender" value="male"> 男
-                    <input type="radio" name="gender" value="male"> 女
+                    <input type="radio" name="gender" value="female"> 女
                 </td>
             </tr>
             <tr>
@@ -142,7 +142,7 @@
             </tr>
 
         </table>
-        <button class="ti" id="signup">
+        <button class="ti" id="signup" type="button">
             注册
         </button>
         <div class="login">我有账户,去<a href="login.html" class="sign">登录</a></div>
@@ -168,30 +168,36 @@
             return;
         }
 
-        Fetch('/user/signup', JSON.stringify({
-            stunb: phone,
+        Fetch('/auth/register', 'post',JSON.stringify({
+            telephone: phone,
             name: name,
-            gender: gender,
+            sex: gender.innerHTML,
             password: code1
         })).then(res => {
-            token = res.token
-            msg = res.msg
+            console.log("注册！")
+            if (res.data === '注册成功') { // 密码错误
+                self.location = 'login.html';
 
-            if (!token) { // 密码错误
-                console.log("密码错误")
-                alert("密码错误")
             } else {
-                // 储存token
-                console.log(token)
-                localStorage.setItem('token', token)
-                // 跳转
-                self.location = 'index.html';
-                console.log("跳转")
+                alert("注册失败！")
+
             }
         })
 
     }
 
+
+    async function Fetch(path, method, body) {
+        return await fetch('http://127.0.0.1:8080/api/v1' + path, {
+            method: method,
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: body,
+        }).then(res => {
+            return res.json()
+        })
+    }
 
 </script>
 

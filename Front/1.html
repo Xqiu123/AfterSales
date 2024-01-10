@@ -2,37 +2,77 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Toggle Password Visibility</title>
+    <title>分页表格</title>
     <style>
-        /* 添加一些简单的样式来美化输入框和图标 */
-        #password-container {
-            position: relative;
+        table {
+            width: 100%;
+            border-collapse: collapse;
         }
-
-        #toggle-password {
-            cursor: pointer;
-            position: absolute;
-            right: 10px;
-            top: 10px;
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
         }
     </style>
 </head>
 <body>
 
-<div id="password-container">
-    <input id="password" type="password" placeholder="Enter Password"/>
-    <img id="toggle-password" src="eye-icon.png" alt="Show/Hide password" />
+<div id="tableContainer"></div>
+<div>
+    <button onclick="previousPage()">上一页</button>
+    <span id="currentPage">1</span>
+    <button onclick="nextPage()">下一页</button>
 </div>
 
 <script>
-    // JavaScript 控制显示和隐藏密码
-    document.getElementById('toggle-password').addEventListener('click', function (e) {
-        const passwordInput = document.getElementById('password');
-        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-        passwordInput.setAttribute('type', type);
-        // 更改图标的src属性，根据需求添加
-        this.src = type === 'text' ? '系统组件及背景图/系统组件及背景图/1.登录页面/闭眼@1x.png' : '系统组件及背景图/系统组件及背景图/1.登录页面/眼睛.png';
-    });
+    var currentPage = 1;
+    var pageSize = 5;
+    var data = [
+        // 示例数据
+        {"name": "Alice", "age": 25},
+        {"name": "Bob", "age": 24},
+        {"name": "Bob", "age": 24},
+        {"name": "Bob", "age": 24},
+        {"name": "Bob", "age": 24},
+        {"name": "Bob", "age": 24},
+        {"name": "Bob", "age": 24},
+        {"name": "Bob", "age": 24}
+        // ...更多数据
+    ];
+
+    function renderTable(page) {
+        var start = (page - 1) * pageSize;
+        var end = start + pageSize;
+        var slicedData = data.slice(start, end);
+
+        var table = '<table><tr><th>Name</th><th>Age</th></tr>';
+        slicedData.forEach(function(row) {
+            table += '<tr><td>' + row.name + '</td><td>' + row.age + '</td></tr>';
+        });
+        table += '</table>';
+
+        document.getElementById('tableContainer').innerHTML = table;
+        document.getElementById('currentPage').innerText = currentPage;
+    }
+
+    function previousPage() {
+        if (currentPage > 1) {
+            currentPage -= 1;
+            renderTable(currentPage);
+        }
+    }
+
+    function nextPage() {
+        if ((currentPage * pageSize) < data.length) {
+            currentPage += 1;
+            renderTable(currentPage);
+        }
+    }
+
+    // 初始渲染
+    renderTable(currentPage);
 </script>
 
 </body>

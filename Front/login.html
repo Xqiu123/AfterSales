@@ -136,7 +136,7 @@
                     <img src="static/asset/img/系统组件及背景图/1.登录页面/密码.png" class="image">
                 </th>
                 <td>
-                    <input id="code" type="password" placeholder="请输入密码" class="in">
+                    <input id="password" type="password" placeholder="请输入密码" class="in">
                 </td>
                 <td style="display: flex">
                     <button type="button" id="eye_con" class="in1"></button>
@@ -144,7 +144,7 @@
             </tr>
 
         </table>
-        <button class="ti" id="sign">
+        <button class="ti" id="sign" type="button">
             登录
         </button>
         <div class="login">没有账户,去<a href="sign.html" class="sign">注册</a></div>
@@ -178,26 +178,38 @@
         var password = document.getElementById('password').value;
         var phone = document.getElementById('phone').value;
 
-        Fetch('/auth/login', JSON.stringify({
-            phonenb: phone,
+        Fetch('/auth/login', 'post', JSON.stringify({
+            telephone: phone,
             password: password
         })).then(res => {
-            token = res.token
+            token = res.data.token
             if (!token) { // 密码错误
                 console.log("密码错误")
-                alert("密码错误")
+                alert("账号或密码有误")
             } else {
                 // 储存token
                 console.log(token)
                 localStorage.setItem('token', token)
                 // 跳转
                 self.location = 'index.html';
-                console.log("跳转")
             }
         })
 
     }
 
+
+    async function Fetch(path, method, body) {
+        return await fetch('http://127.0.0.1:8080/api/v1' + path, {
+            method: method,
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+                'Authorization':localStorage.getItem('token')
+            },
+            body: body,
+        }).then(res => {
+            return res.json()
+        })
+    }
 </script>
 </body>
 </html>

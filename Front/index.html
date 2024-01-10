@@ -218,19 +218,20 @@
 
         .main {
             display: flex;
-            background-color: pink;
+            background-color: rgb(245, 245, 245);
             margin-top: 20px;
             justify-content: center;
         }
 
         .nav {
-            background-color: #F7F7F7;
+
+            width: 150px;
         }
 
         .nav ul li {
             display: flex;
             height: 50px;
-            width: 120px;
+            background-color: white;
             line-height: 50px;
             cursor: pointer;
         }
@@ -246,12 +247,14 @@
 
         .content {
             background-color: #ADCFEA;
-            width: 700px;
+            width: 1100px;
         }
 
         .frame {
             display: flex;
             flex-wrap: wrap;
+            justify-content: center;
+            width: 1100px;
         }
 
         .menu {
@@ -432,21 +435,21 @@
         </ul>
     </div>
 </div>
-
+<!--<hr>-->
 <div class="main" id="main">
     <!--    导航栏-->
     <div class="nav">
         <ul class="menu">
-            <li v-for="(item, index) in list1" :key="item.id"
-                @click="() => { ShowOption(item.id); ShowContent(item.id); toggleDropdown();}">
+            <li id="nav_li" v-for="(item, index) in list1" :key="item.id"
+                @click="() => {  labelChange(item.id); deleteChild(); ShowContent(item.name);}">
                 <div>
-                    <img :src="item.image">
+                    <img :src="item.image" id="nav_icon">
                 </div>
-                <div class="txt">
+                <div class="txt" id="txt">
                     {{ item.name }}
                 </div>
                 <ul class="submenu">
-                    <li v-for="(item, index) in detail" :key="item.id" class="submenu_li" @click="ShowDetail(item.id)">
+                    <li v-for="(item, index) in BrandList" :key="item.id" class="submenu_li">
                         {{ item.name }}
                     </li>
                 </ul>
@@ -465,10 +468,8 @@
 
 
 <!--引入的是开发版本包-->
-<script type="module" src="vue.js"></script>
+<script src="vue.js"></script>
 <script>
-
-    import {Fetch} from "./fetch";
 
     let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');
@@ -551,113 +552,224 @@
         });
     });
 
-    let detail;
+
+    let BrandList;
+    Fetch('/car/list', 'get', null).then(res => {
+        BrandList = res.data
+        console.log(res.data);
+        console.log(BrandList);
+    })
 
     const app = new Vue({
         el: '#main',
         data: {
             index: 0,
             list1: [
-                {id: 1, name: '奥迪', image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/奥迪.png'},
-                {id: 2, name: '宝马', image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/宝马.png'},
-                {id: 3, name: '保时捷', image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/保时捷.png'},
-                {id: 4, name: '奔驰', image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/奔驰.png'},
-                {id: 5, name: '长安', image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/长安.png'},
-                {id: 6, name: '大众', image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/大众.png'},
-                {id: 7, name: '东风', image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/东风.png'},
-                {id: 8, name: '福特', image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/福特.png'},
-                {id: 9, name: 'Jeep', image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/Jeep.png'},
-                {id: 10, name: '路虎', image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/路虎.png'},
-                {id: 11, name: '现代', image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/现代.png'}
+                {
+                    id: 1,
+                    name: '奥迪',
+                    image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/奥迪.png',
+                    image1: 'static/asset/img/图标蓝/图标蓝/奥迪.png'
+                },
+                {
+                    id: 2,
+                    name: '宝马',
+                    image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/宝马.png',
+                    image1: 'static/asset/img/图标蓝/图标蓝/宝马.png'
+                },
+                {
+                    id: 3,
+                    name: '保时捷',
+                    image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/保时捷.png',
+                    image1: 'static/asset/img/图标蓝/图标蓝/保时捷.png'
+                },
+                {
+                    id: 4,
+                    name: '奔驰',
+                    image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/奔驰.png',
+                    image1: 'static/asset/img/图标蓝/图标蓝/奔驰.png'
+                },
+                {
+                    id: 5,
+                    name: '长安',
+                    image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/长安.png',
+                    image1: 'static/asset/img/图标蓝/图标蓝/长安.png'
+                },
+                {
+                    id: 6,
+                    name: '大众',
+                    image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/大众.png',
+                    image1: 'static/asset/img/图标蓝/图标蓝/大众.png'
+                },
+                {
+                    id: 7,
+                    name: '东风',
+                    image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/东风.png',
+                    image1: 'static/asset/img/图标蓝/图标蓝/东风.png'
+                },
+                {
+                    id: 8,
+                    name: '福特',
+                    image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/福特.png',
+                    image1: 'static/asset/img/图标蓝/图标蓝/福特.png'
+                },
+                {
+                    id: 9,
+                    name: 'Jeep',
+                    image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/Jeep.png',
+                    image1: 'static/asset/img/图标蓝/图标蓝/Jeep.png'
+                },
+                {
+                    id: 10,
+                    name: '路虎',
+                    image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/路虎.png',
+                    image1: 'static/asset/img/图标蓝/图标蓝/路虎.png'
+                },
+                {
+                    id: 11,
+                    name: '现代',
+                    image: 'static/asset/img/系统组件及背景图/4.用户主页-车型/现代.png',
+                    image1: 'static/asset/img/图标蓝/图标蓝/现代.png'
+                }
             ]
         },
         methods: {
-            ShowContent(id) {
-                Fetch('/movie/label', JSON.stringify({
-                    label: list[id].name
-                }))
-                    .then(res => {
-                        detail = res.list;
-                        console.log(detail.name);
-                        let list = res.list
-                        let msg = res.msg
+            ShowContent(name) {
 
-                        var main = document.querySelector(".frame");
-                        for (let i = 0; i < list.length; i++) {
-                            var div = document.createElement('div');
-                            var img = document.createElement('img');
-                            img.src = list[i].image
-                            var name = document.createElement('b')
-                            img.className = "pic"
-                            name.innerHTML = list[i].name
-                            div.appendChild(img);
-                            var br = document.createElement('br')
-                            div.appendChild(br);
-                            div.appendChild(name);
-                            div.className = "each";
-                            main.appendChild(div);
-                            div.click(function () {
-                                localStorage.setItem('car_id', list[i].id)
-                                self.location = 'car_detail'
-
-
-                            })
-                        }
-                    })
+                var filterBrand = this.getList(name)
+                console.log(filterBrand);
+                var main = document.querySelector(".frame");
+                main.style.width = "1100px"
+                for (let i = 0; i < filterBrand.length; i++) {
+                    var div = document.createElement('div');
+                    div.style.display = "flex"
+                    div.style.justifyContent = "center"
+                    div.style.flexWrap = "Wrap"
+                    div.style.flexDirection = "column"
+                    div.style.alignItems = "center"
+                    div.style.marginLeft = "30px"
+                    div.style.marginTop = "50px"
+                    var img = document.createElement('img');
+                    img.style.height = "230px"
+                    img.style.width = "330px"
+                    // img.style.marginLeft = "30px"
+                    // img.style.marginTop = "50px"
+                    img.src = 'static/asset/img' + filterBrand[i].image
+                    var name = document.createElement('div')
+                    name.style.display = "flex"
+                    name.style.alignItems = "center"
+                    name.style.justifyContent = "center"
+                    // name.style.backgroundColor = "white"
+                    name.style.fontSize = "18px"
+                    name.style.width = "330px"
+                    name.style.height = "30px"
+                    name.innerHTML = filterBrand[i].name
+                    div.appendChild(img);
+                    var br = document.createElement('br')
+                    div.appendChild(br);
+                    div.appendChild(name);
+                    div.className = "each";
+                    main.appendChild(div);
+                    // div.onclick(function () {
+                    //     localStorage.setItem('car_id', filterBrand[i].id)
+                    //     self.location = 'car_detail'
+                    //
+                    //
+                    // })
+                }
 
             },
-            ShowDetail(id) {
-                        var car_detail = detail[(id%5)-1];
-                        var main = document.querySelector(".frame");
-                        // 图片和名字
-                        var left = document.createElement('div');
-                        var img = document.createElement('img');
-                        img.src = car_detail.image
-                        img.className = "pic"
-                        var name = document.createElement('b')
-                        name.innerHTML = car_detail.name
-                        left.appendChild(img);
-                        var br = document.createElement('br')
-                        left.appendChild(br);
-                        left.appendChild(name);
+            // ShowDetail(id) {
+            //     var car_detail = detail[(id % 5) - 1];
+            //     var main = document.querySelector(".frame");
+            //     // 图片和名字
+            //     var left = document.createElement('div');
+            //     var img = document.createElement('img');
+            //     img.src = car_detail.image
+            //     img.className = "pic"
+            //     var name = document.createElement('b')
+            //     name.innerHTML = car_detail.name
+            //     left.appendChild(img);
+            //     var br = document.createElement('br')
+            //     left.appendChild(br);
+            //     left.appendChild(name);
+            //
+            //     // 详细信息
+            //     var right = document.createElement('div');
+            //     var ul = document.createElement('ul');
+            //     var li1 = document.createElement('li');
+            //     var li2 = document.createElement('li');
+            //     var li3 = document.createElement('li');
+            //     var li4 = document.createElement('li');
+            //     var li5 = document.createElement('li');
+            //     var li6 = document.createElement('li');
+            //     var li7 = document.createElement('li');
+            //     var li8 = document.createElement('li');
+            //     var li9 = document.createElement('li');
+            //     li1.innerHTML = '厂商指导价' + car_detail.price;
+            //     li2.innerHTML = '颜色' + car_detail.color;
+            //     li3.innerHTML = '长宽高（cm）' + car_detail.size;
+            //     li4.innerHTML = '发动机' + car_detail.motor;
+            //     li5.innerHTML = '变速箱' + car_detail.gearbox;
+            //     li6.innerHTML = '最大马力（Ps）' + car_detail.maxhorse;
+            //     li7.innerHTML = '最大功率（kW）' + car_detail.maxpower;
+            //     li8.innerHTML = '驱动方式' + car_detail.drive_mode;
+            //     li9.innerHTML = '供油方式' + car_detail.fuel;
+            //     ul.appendChild(li1);
+            //     ul.appendChild(li2);
+            //     ul.appendChild(li3);
+            //     ul.appendChild(li4);
+            //     ul.appendChild(li5);
+            //     ul.appendChild(li6);
+            //     ul.appendChild(li7);
+            //     ul.appendChild(li8);
+            //     ul.appendChild(li9);
+            //     right.appendChild(ul);
+            //     main.appendChild(right);
+            //     main.appendChild(left);
+            // },
+            getList(name) {
+                let getList = BrandList[name];
+                console.log(name);
+                console.log(BrandList[name]);
+                return getList;
+            },
 
-                        // 详细信息
-                        var right = document.createElement('div');
-                        var ul = document.createElement('ul');
-                        var li1 = document.createElement('li');
-                        var li2= document.createElement('li');
-                        var li3 = document.createElement('li');
-                        var li4 = document.createElement('li');
-                        var li5 = document.createElement('li');
-                        var li6 = document.createElement('li');
-                        var li7 = document.createElement('li');
-                        var li8 = document.createElement('li');
-                        var li9 = document.createElement('li');
-                        li1.innerHTML = '厂商指导价' + car_detail.price;
-                        li2.innerHTML = '颜色' + car_detail.color;
-                        li3.innerHTML = '长宽高（cm）' + car_detail.size;
-                        li4.innerHTML = '发动机' + car_detail.motor;
-                        li5.innerHTML = '变速箱' + car_detail.gearbox;
-                        li6.innerHTML = '最大马力（Ps）' + car_detail.maxhorse;
-                        li7.innerHTML = '最大功率（kW）' + car_detail.maxpower;
-                        li8.innerHTML = '驱动方式' + car_detail.drive_mode;
-                        li9.innerHTML = '供油方式' + car_detail.fuel;
-                        ul.appendChild(li1);
-                        ul.appendChild(li2);
-                        ul.appendChild(li3);
-                        ul.appendChild(li4);
-                        ul.appendChild(li5);
-                        ul.appendChild(li6);
-                        ul.appendChild(li7);
-                        ul.appendChild(li8);
-                        ul.appendChild(li9);
-                        right.appendChild(ul);
-                        main.appendChild(right);
-                        main.appendChild(left);
-                    }
+            // 删除列表原有的信息，便于创建后面的信息
+            deleteChild() {
+                var e = document.querySelector(".frame");
+                var first = e.firstElementChild;
+                while (first) {
+                    first.remove();
+                    first = e.firstElementChild;
+                }
+            },
+            labelChange(id) {
+                let nav_icon = document.getElementById('nav_icon');
+                let txt = document.getElementById('txt');
+                let nav_li = document.getElementById('nav_li');
+                nav_icon.src = app.list1[id].image1;
+                txt.style.color = '#1684FC'
+                nav_li.style.backgroundColor = '#E6F7FF'
+            }
+
 
         }
     })
+
+
+    async function Fetch(path, method, body) {
+        return await fetch('http://127.0.0.1:8080/api/v1' + path, {
+            method: method,
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+                'Authorization': localStorage.getItem('token')
+            },
+            body: body,
+        }).then(res => {
+            return res.json()
+        })
+    }
 </script>
 </body>
 </html>
