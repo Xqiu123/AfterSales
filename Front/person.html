@@ -361,7 +361,7 @@
 <div class="head">
     <div class="icon"><img src="static/asset/img/系统组件及背景图/9.用户个人中心/左箭头.png"></div>
     <div class="txt">个人中心</div>
-    <div class="txt1">你好，可可西里</div>
+    <div class="txt1">你好，<span id="me" value = "无"></span></div>
 </div>
 
 <div class="main" id="main">
@@ -394,15 +394,16 @@
             <div class="me">
                 <div class="lis">
                     <img src="static/asset/img/系统组件及背景图/10.用户中心-个人信息/昵称.png">
-                    昵称：&nbsp;可可西里
+                    昵称：<span id="myname" ></span>
+
                 </div>
                 <div class="lis">
                     <img src="static/asset/img/系统组件及背景图/10.用户中心-个人信息/性别.png">
-                    性别：&nbsp;女
+                    性别：&nbsp;<span id="mysex"></span>
                 </div>
                 <div class="lis">
                     <img src="static/asset/img/系统组件及背景图/10.用户中心-个人信息/手机号.png">
-                    绑定手机号：&nbsp;17377777777
+                    绑定手机号：<span id="myphone"></span>
                 </div>
 
             </div>
@@ -479,6 +480,23 @@
 
 <script src="vue.js"></script>
 <script>
+
+    //查询个人信息
+    Fetch('/user/myprofile', 'get')
+        .then(res => {
+            msg = res.msg
+            if (!msg || msg == "wrong token!") {
+                alert('请先登录!')
+            } else {
+                console.log(res)
+                console.log(res.data.sex)
+                document.getElementById('me').innerHTML = res.data.name
+                document.getElementById("myname").innerHTML = res.data.name
+                document.getElementById("mysex").innerHTML = res.data.sex
+                document.getElementById("myphone").innerHTML = res.data.telephone
+            }
+
+        })
 
 
     const app = new Vue({

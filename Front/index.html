@@ -224,16 +224,7 @@
         }
 
         .nav {
-
-            width: 150px;
-        }
-
-        .nav ul li {
-            display: flex;
-            height: 50px;
-            background-color: white;
-            line-height: 50px;
-            cursor: pointer;
+            width: 200px;
         }
 
         .nav ul li img {
@@ -243,6 +234,41 @@
 
         .nav ul li .txt {
             padding-left: 10px;
+        }
+
+
+        /* 主菜单样式 */
+        .menu {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            width: 200px;
+        }
+
+        /* 主菜单项样式 */
+        .menu > li {
+            line-height: 50px;
+            height: 50px;
+            background-color: white;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
+            height: 50px;
+        }
+
+        /* 子菜单样式，初始时隐藏 */
+        .submenu {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: none;
+        }
+
+        /* 子菜单项样式 */
+        .submenu_li {
+            padding: 5px 10px;
+            background-color: #e0e0e0;
+            border-bottom: 1px solid #ddd;
         }
 
         .content {
@@ -255,33 +281,6 @@
             flex-wrap: wrap;
             justify-content: center;
             width: 1100px;
-        }
-
-        .menu {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            width: 200px;
-        }
-
-        .submenu {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-            display: none;
-        }
-
-        .submenu_li {
-            padding: 5px 10px;
-            background-color: #e0e0e0;
-            border-bottom: 1px solid #ddd;
-        }
-
-        .menu > li {
-            padding: 10px;
-            background-color: #f0f0f0;
-            border-bottom: 1px solid #ddd;
-            cursor: pointer;
         }
     </style>
 </head>
@@ -440,18 +439,22 @@
     <!--    导航栏-->
     <div class="nav">
         <ul class="menu">
-            <li id="nav_li" v-for="(item, index) in list1" :key="item.id"
-                @click="() => {  labelChange(item.id); deleteChild(); ShowContent(item.name);}">
-                <div>
-                    <img :src="item.image" id="nav_icon">
-                </div>
-                <div class="txt" id="txt">
+            <li :id="`nav_li_${item.id}`" v-for="(item, index) in list1" :key="item.id"
+                @click="() => {  labelChange(item.id); deleteChild(); ShowContent(item.name); showMenu(item.id);}">
+                <span>
+                    <img :src="item.image" :id="`nav_icon_${item.id}`">
+                </span>
+                <span class="txt" :id="`txt_${item.id}`">
                     {{ item.name }}
-                </div>
-                <ul class="submenu">
-                    <li v-for="(item, index) in BrandList" :key="item.id" class="submenu_li">
-                        {{ item.name }}
-                    </li>
+                </span>
+                <ul class="submenu" v-show="flag" :id="`submenu_${item.id}`">
+                    <div v-if="flag">
+                        <li v-for="(item, index) in getList(item.name)" :key="item.id" class="submenu_li"
+                            @click="showDetail(item.id)">
+                            {{ item.name }}
+                        </li>
+                    </div>
+
                 </ul>
 
             </li>
@@ -470,7 +473,6 @@
 <!--引入的是开发版本包-->
 <script src="vue.js"></script>
 <script>
-
     let currentSlide = 0;
     const slides = document.querySelectorAll('.slide');
     const buttons = document.querySelectorAll('.prev-btn, .next-btn');
@@ -534,35 +536,13 @@
     showSlide(currentSlide);
 
 
-    // 获取所有主菜单项
-    var menuItems = document.querySelectorAll('.menu > li');
-
-    // 为每个主菜单项添加点击事件监听器
-    menuItems.forEach(function (menuItem) {
-        menuItem.addEventListener('click', function () {
-            // 查找当前主菜单项下的子菜单
-            var submenu = this.querySelector('.submenu');
-
-            // 切换子菜单的显示和隐藏
-            if (submenu.style.display === 'block') {
-                submenu.style.display = 'none';
-            } else {
-                submenu.style.display = 'block';
-            }
-        });
-    });
-
-
     let BrandList;
-    Fetch('/car/list', 'get', null).then(res => {
-        BrandList = res.data
-        console.log(res.data);
-        console.log(BrandList);
-    })
 
     const app = new Vue({
         el: '#main',
         data: {
+            flag: false,
+            lastclick: 0,
             index: 0,
             list1: [
                 {
@@ -637,7 +617,7 @@
             ShowContent(name) {
 
                 var filterBrand = this.getList(name)
-                console.log(filterBrand);
+                console.log('6666666666')
                 var main = document.querySelector(".frame");
                 main.style.width = "1100px"
                 for (let i = 0; i < filterBrand.length; i++) {
@@ -647,7 +627,7 @@
                     div.style.flexWrap = "Wrap"
                     div.style.flexDirection = "column"
                     div.style.alignItems = "center"
-                    div.style.marginLeft = "30px"
+                    div.style.margin = "10px"
                     div.style.marginTop = "50px"
                     var img = document.createElement('img');
                     img.style.height = "230px"
@@ -679,59 +659,65 @@
                 }
 
             },
-            // ShowDetail(id) {
-            //     var car_detail = detail[(id % 5) - 1];
-            //     var main = document.querySelector(".frame");
-            //     // 图片和名字
-            //     var left = document.createElement('div');
-            //     var img = document.createElement('img');
-            //     img.src = car_detail.image
-            //     img.className = "pic"
-            //     var name = document.createElement('b')
-            //     name.innerHTML = car_detail.name
-            //     left.appendChild(img);
-            //     var br = document.createElement('br')
-            //     left.appendChild(br);
-            //     left.appendChild(name);
-            //
-            //     // 详细信息
-            //     var right = document.createElement('div');
-            //     var ul = document.createElement('ul');
-            //     var li1 = document.createElement('li');
-            //     var li2 = document.createElement('li');
-            //     var li3 = document.createElement('li');
-            //     var li4 = document.createElement('li');
-            //     var li5 = document.createElement('li');
-            //     var li6 = document.createElement('li');
-            //     var li7 = document.createElement('li');
-            //     var li8 = document.createElement('li');
-            //     var li9 = document.createElement('li');
-            //     li1.innerHTML = '厂商指导价' + car_detail.price;
-            //     li2.innerHTML = '颜色' + car_detail.color;
-            //     li3.innerHTML = '长宽高（cm）' + car_detail.size;
-            //     li4.innerHTML = '发动机' + car_detail.motor;
-            //     li5.innerHTML = '变速箱' + car_detail.gearbox;
-            //     li6.innerHTML = '最大马力（Ps）' + car_detail.maxhorse;
-            //     li7.innerHTML = '最大功率（kW）' + car_detail.maxpower;
-            //     li8.innerHTML = '驱动方式' + car_detail.drive_mode;
-            //     li9.innerHTML = '供油方式' + car_detail.fuel;
-            //     ul.appendChild(li1);
-            //     ul.appendChild(li2);
-            //     ul.appendChild(li3);
-            //     ul.appendChild(li4);
-            //     ul.appendChild(li5);
-            //     ul.appendChild(li6);
-            //     ul.appendChild(li7);
-            //     ul.appendChild(li8);
-            //     ul.appendChild(li9);
-            //     right.appendChild(ul);
-            //     main.appendChild(right);
-            //     main.appendChild(left);
-            // },
+            showDetail(id) {
+                Fetch('/car/info', 'get', JSON.stringify({
+                    id: id
+                })).then(res => {
+                    let car_detail = res.data;
+
+                    var main = document.querySelector(".frame");
+                    // 图片和名字
+                    var left = document.createElement('div');
+                    var img = document.createElement('img');
+                    img.src = 'static/asset/img' + car_detail.image
+                    img.className = "pic"
+                    var name = document.createElement('b')
+                    name.innerHTML = car_detail.name
+                    left.appendChild(img);
+                    var br = document.createElement('br')
+                    left.appendChild(br);
+                    left.appendChild(name);
+
+                    // 详细信息
+                    var right = document.createElement('div');
+                    var ul = document.createElement('ul');
+                    var li1 = document.createElement('li');
+                    var li2 = document.createElement('li');
+                    var li3 = document.createElement('li');
+                    var li4 = document.createElement('li');
+                    var li5 = document.createElement('li');
+                    var li6 = document.createElement('li');
+                    var li7 = document.createElement('li');
+                    var li8 = document.createElement('li');
+                    var li9 = document.createElement('li');
+                    li1.innerHTML = '厂商指导价' + car_detail.price;
+                    li2.innerHTML = '颜色' + car_detail.color;
+                    li3.innerHTML = '长宽高（cm）' + car_detail.size;
+                    li4.innerHTML = '发动机' + car_detail.motor;
+                    li5.innerHTML = '变速箱' + car_detail.gearbox;
+                    li6.innerHTML = '最大马力（Ps）' + car_detail.maxhorse;
+                    li7.innerHTML = '最大功率（kW）' + car_detail.maxpower;
+                    li8.innerHTML = '驱动方式' + car_detail.drive_mode;
+                    li9.innerHTML = '供油方式' + car_detail.fuel;
+                    ul.appendChild(li1);
+                    ul.appendChild(li2);
+                    ul.appendChild(li3);
+                    ul.appendChild(li4);
+                    ul.appendChild(li5);
+                    ul.appendChild(li6);
+                    ul.appendChild(li7);
+                    ul.appendChild(li8);
+                    ul.appendChild(li9);
+                    right.appendChild(ul);
+                    main.appendChild(right);
+                    main.appendChild(left);
+
+                })
+            },
             getList(name) {
-                let getList = BrandList[name];
                 console.log(name);
-                console.log(BrandList[name]);
+                console.log(BrandList);
+                let getList = BrandList[name];
                 return getList;
             },
 
@@ -744,17 +730,53 @@
                     first = e.firstElementChild;
                 }
             },
+
             labelChange(id) {
-                let nav_icon = document.getElementById('nav_icon');
-                let txt = document.getElementById('txt');
-                let nav_li = document.getElementById('nav_li');
-                nav_icon.src = app.list1[id].image1;
-                txt.style.color = '#1684FC'
-                nav_li.style.backgroundColor = '#E6F7FF'
+                if (app.lastclick) {
+                    let nav_icon = document.getElementById('nav_icon_' + app.lastclick);
+                    let txt = document.getElementById('txt_' + app.lastclick);
+                    let nav_li = document.getElementById('nav_li_' + app.lastclick);
+                    nav_icon.src = app.list1[app.lastclick - 1].image;
+                    txt.style.color = 'black';
+                    nav_li.style.backgroundColor = 'white';
+                }
+                app.lastclick = id;
+                console.log("debug" + id);
+                let nav_icon = document.getElementById('nav_icon_' + id);
+                let txt = document.getElementById('txt_' + id);
+                let nav_li = document.getElementById('nav_li_' + id);
+
+                nav_icon.src = app.list1[id - 1].image1;
+                txt.style.color = '#1684FC';
+                nav_li.style.backgroundColor = '#E6F7FF';
+            },
+            showMenu(id) {
+                if (this.flag) {
+                    // 查找当前主菜单项下的子菜单
+                    var submenu = document.getElementById('submenu_' + id);
+                    console.log(submenu);
+                    // 切换子菜单的显示和隐藏
+                    if (submenu.style.display === 'block') {
+                        submenu.style.display = 'none';
+                    } else {
+                        submenu.style.display = 'block';
+                    }
+                }
+
             }
-
-
         }
+    })
+
+    function mounted() {
+        app.labelChange(app.list1[0].id);
+        app.ShowContent(app.list1[0].name);
+
+    }
+
+    Fetch('/car/list', 'get', null).then(res => {
+        BrandList = res.data;
+        app.flag = true;
+        mounted();
     })
 
 

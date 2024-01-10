@@ -2,77 +2,77 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>分页表格</title>
+    <title>二级列表示例</title>
     <style>
-        table {
-            width: 100%;
-            border-collapse: collapse;
+        /* 主菜单样式 */
+        .menu {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            width: 200px;
         }
-        table, th, td {
-            border: 1px solid black;
+
+        /* 主菜单项样式 */
+        .menu > li {
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-bottom: 1px solid #ddd;
+            cursor: pointer;
         }
-        th, td {
-            padding: 8px;
-            text-align: left;
+
+        /* 子菜单样式，初始时隐藏 */
+        .submenu {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: none;
+        }
+
+        /* 子菜单项样式 */
+        .submenu li {
+            padding: 5px 10px;
+            background-color: #e0e0e0;
+            border-bottom: 1px solid #ddd;
         }
     </style>
 </head>
 <body>
 
-<div id="tableContainer"></div>
-<div>
-    <button onclick="previousPage()">上一页</button>
-    <span id="currentPage">1</span>
-    <button onclick="nextPage()">下一页</button>
-</div>
+<ul class="menu">
+    <li>
+        主菜单项 1
+        <ul class="submenu">
+            <li>子菜单项 1-1</li>
+            <li>子菜单项 1-2</li>
+        </ul>
+    </li>
+    <li>
+        主菜单项 2
+        <ul class="submenu">
+            <li>子菜单项 2-1</li>
+            <li>子菜单项 2-2</li>
+        </ul>
+    </li>
+</ul>
 
 <script>
-    var currentPage = 1;
-    var pageSize = 5;
-    var data = [
-        // 示例数据
-        {"name": "Alice", "age": 25},
-        {"name": "Bob", "age": 24},
-        {"name": "Bob", "age": 24},
-        {"name": "Bob", "age": 24},
-        {"name": "Bob", "age": 24},
-        {"name": "Bob", "age": 24},
-        {"name": "Bob", "age": 24},
-        {"name": "Bob", "age": 24}
-        // ...更多数据
-    ];
+    // 获取所有主菜单项
+    var menuItems = document.querySelectorAll('.menu > li');
 
-    function renderTable(page) {
-        var start = (page - 1) * pageSize;
-        var end = start + pageSize;
-        var slicedData = data.slice(start, end);
+    // 为每个主菜单项添加点击事件监听器
+    menuItems.forEach(function(menuItem) {
+        menuItem.addEventListener('click', function() {
+            // 查找当前主菜单项下的子菜单
+            var submenu = this.querySelector('.submenu');
 
-        var table = '<table><tr><th>Name</th><th>Age</th></tr>';
-        slicedData.forEach(function(row) {
-            table += '<tr><td>' + row.name + '</td><td>' + row.age + '</td></tr>';
+            // 切换子菜单的显示和隐藏
+            if (submenu.style.display === 'block') {
+                submenu.style.display = 'none';
+            } else {
+                submenu.style.display = 'block';
+            }
         });
-        table += '</table>';
-
-        document.getElementById('tableContainer').innerHTML = table;
-        document.getElementById('currentPage').innerText = currentPage;
-    }
-
-    function previousPage() {
-        if (currentPage > 1) {
-            currentPage -= 1;
-            renderTable(currentPage);
-        }
-    }
-
-    function nextPage() {
-        if ((currentPage * pageSize) < data.length) {
-            currentPage += 1;
-            renderTable(currentPage);
-        }
-    }
-
-    // 初始渲染
-    renderTable(currentPage);
+    });
 </script>
 
 </body>
